@@ -6,10 +6,6 @@ import apiClient from './apiClient'
 class FeedService {
   constructor(private apiClient: AxiosInstance) {}
 
-  async pass() {
-    return true
-  }
-
   getTrendingFeed(): Promise<Feed[]> {
     let url, config
     // if (process.env.NODE_ENV === 'development') {

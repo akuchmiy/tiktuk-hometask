@@ -6,19 +6,18 @@ import userService from '../../services/userService'
 import { UserData } from '../../models/UserData'
 import TheLoader from '../TheLoader/TheLoader'
 
-interface Params {
-  username: string | undefined
-}
-
 const UserTab: FC = () => {
-  // @ts-ignore
-  const { username } = useParams<Params>()
+  const { username } = useParams<'username'>()
   const [userData, setUserData] = useState<UserData | null>(null)
   const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     setUserData(null)
     ;(async () => {
+      if (!username) {
+        return setIsError(true)
+      }
+
       const data = await userService.getUserInfo(username)
       if (!data) setIsError(true)
       setUserData(data)

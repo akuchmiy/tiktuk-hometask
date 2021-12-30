@@ -34,7 +34,7 @@ const FeedControls: FC<FeedControlsProps> = ({
         disabled={columns === maxColumns}
         className={'hover:text-gray-400'}
         onClick={() => changeColumns('UP')}
-        tabIndex={0}
+        tabIndex={-1}
       >
         <FontAwesomeIcon icon={['fas', 'plus']} />
       </button>
@@ -43,6 +43,7 @@ const FeedControls: FC<FeedControlsProps> = ({
         disabled={columns === minColumns}
         className={'hover:text-gray-400'}
         onClick={() => changeColumns('DOWN')}
+        tabIndex={-1}
       >
         <FontAwesomeIcon icon={['fas', 'minus']} />
       </button>

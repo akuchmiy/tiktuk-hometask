@@ -18,7 +18,7 @@ const ThemeChanger: FC = () => {
       setIsDark(true)
     }
 
-    const listener = (e: any) => {
+    const listener = (e: MediaQueryListEventMap['change']) => {
       setIsDark(e.matches)
     }
 

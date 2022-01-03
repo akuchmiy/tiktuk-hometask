@@ -1,8 +1,7 @@
-import React, { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo } from 'react'
 import useQuery from '../../hooks/useQuery'
 import FeedList from './FeedList'
-import { Feed } from '../../models/Feed'
-import FeedService from '../../services/FeedService'
+import useFeed from '../../hooks/useFeed'
 
 interface WithDataProps {
   username?: string
@@ -22,8 +21,7 @@ const WithDataFeedList: FC<WithDataProps> = ({
 }) => {
   const query = useQuery()
   const queryParam = useMemo(() => query.get('query'), [query])
-  const [feedList, setFeedList] = useState<Feed[]>([])
-  const [isError, setIsError] = useState(false)
+  const [feedList, isError] = useFeed(username, queryParam)
 
   const newTitle = useMemo(() => {
     if (username) return `${username}'s profile`
@@ -35,21 +33,6 @@ const WithDataFeedList: FC<WithDataProps> = ({
   useEffect(() => {
     document.title = newTitle
   }, [newTitle])
-
-  useEffect(() => {
-    setIsError(false)
-    setFeedList([])
-    ;(async () => {
-      const data = username
-        ? await FeedService.getTrendingFeed() // FeedService.getUserFeed(username)
-        : queryParam == null
-        ? await FeedService.getTrendingFeed()
-        : await FeedService.getHashtagFeed(queryParam)
-
-      if (data.length === 0) setIsError(true)
-      setFeedList(data)
-    })()
-  }, [username, queryParam, setFeedList])
 
   return (
     <>

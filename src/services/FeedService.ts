@@ -1,21 +1,17 @@
 import { AxiosInstance } from 'axios'
 import { Feed } from '../models/Feed'
 import apiClient from './apiClient'
-// import configService from '../config/configService'
 
 class FeedService {
-  constructor(private apiClient: AxiosInstance) {}
+  constructor(private apiClient: AxiosInstance) {
+    this.getTrendingFeed = this.getTrendingFeed.bind(this)
+    this.getUserFeed = this.getUserFeed.bind(this)
+    this.getHashtagFeed = this.getHashtagFeed.bind(this)
+  }
 
-  getTrendingFeed(): Promise<Feed[]> {
-    let url, config
-    // if (process.env.NODE_ENV === 'development') {
-    //   url = configService.getValue('REACT_APP_DEV_FEED_URL')
-    //   config = { baseURL: '' }
-    // } else {
-    url = '/trending/feed'
-    config = {}
-    // }
-    return this.getFeed(url, config)
+  async getTrendingFeed(): Promise<Feed[]> {
+    const url = '/trending/feed'
+    return this.getFeed(url)
   }
 
   async getUserFeed(username: string): Promise<Feed[]> {
@@ -31,7 +27,7 @@ class FeedService {
   private async getFeed(url: string, config?: Object) {
     try {
       const { data } = await this.apiClient.get<Feed[]>(url, config)
-      if (!(data instanceof Array)) {
+      if (!Array.isArray(data)) {
         return []
       }
       return data

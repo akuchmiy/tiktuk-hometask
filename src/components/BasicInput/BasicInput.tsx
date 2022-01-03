@@ -1,6 +1,10 @@
-import React, { FC, forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 
-const BasicInput: FC<any> = forwardRef<HTMLInputElement>((props: any, ref) => {
+interface InputProps extends HTMLAttributes<HTMLInputElement> {
+  type?: string
+}
+
+const BasicInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { className, type, ...rest } = props
 
   return (
@@ -12,8 +16,8 @@ const BasicInput: FC<any> = forwardRef<HTMLInputElement>((props: any, ref) => {
         className
       }
       ref={ref}
+      type={type || 'text'}
       {...rest}
-      type={type ? type : 'text'}
     />
   )
 })

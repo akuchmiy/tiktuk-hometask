@@ -11,9 +11,7 @@ class NumberService {
 
   public formatNumber(number: number, digits = 2): string {
     const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
-    const item = [...this.lookup].reverse().find(function (item) {
-      return number >= item.value
-    })
+    const item = [...this.lookup].reverse().find((item) => number >= item.value)
     return item
       ? (number / item.value).toFixed(digits).replace(rx, '$1') + item.symbol
       : '0'

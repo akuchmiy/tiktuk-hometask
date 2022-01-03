@@ -101,7 +101,6 @@ const FeedList: FC<FeedListProps> = memo(
           </div>
         ) : (
           <div className={`grid grid-cols-${columns} ${className}`}>
-            {/*<button onClick={() => console.log(videoRefs.current)}>Lol</button>*/}
             {feedList.map((feed, index) => (
               <FeedItem
                 ref={(el) =>

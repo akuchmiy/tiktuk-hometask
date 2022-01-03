@@ -1,4 +1,4 @@
-import React, { Profiler } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import HeaderSearch from './HeaderSearch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -32,14 +32,7 @@ function TheHeader() {
             </span>
           </Link>
         </div>
-        <Profiler
-          id={'search'}
-          onRender={function () {
-            console.log(arguments)
-          }}
-        >
-          <HeaderSearch />
-        </Profiler>
+        <HeaderSearch />
         <ThemeChanger />
       </div>
     </header>

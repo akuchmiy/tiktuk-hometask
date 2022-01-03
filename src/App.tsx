@@ -1,11 +1,9 @@
 import React, { FC } from 'react'
-import './App.css'
 import TheHeader from './components/layout/TheHeader/TheHeader'
 import AppRoutes from './routes'
 import TheFooter from './components/layout/TheFooter/TheFooter'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
-
-console.log(document.cookie)
+import './App.css'
 
 const App: FC = () => {
   return (

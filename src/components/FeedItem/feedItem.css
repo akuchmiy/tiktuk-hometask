@@ -1,0 +1,14 @@
+:root{
+    --feed-width: 540px;
+    --feed-height: 1024px;
+}
+
+.video {
+    max-width: var(--feed-width);
+    min-width: calc(var(--feed-width) * 0.5);
+    width: 100%;
+
+    max-height: var(--feed-height);
+    min-height: calc(var(--feed-height) * 0.5);
+    height: 100%;
+}

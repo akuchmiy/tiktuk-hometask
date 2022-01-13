@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios'
 import { Feed } from '../models/Feed'
 import apiClient from './apiClient'
 
-class FeedService {
+export class FeedService {
   constructor(private apiClient: AxiosInstance) {
     this.getTrendingFeed = this.getTrendingFeed.bind(this)
     this.getUserFeed = this.getUserFeed.bind(this)

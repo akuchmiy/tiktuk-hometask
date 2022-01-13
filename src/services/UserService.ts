@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios'
 import apiClient from './apiClient'
 import { UserData } from '../models/UserData'
 
-class UserService {
+export class UserService {
   constructor(private apiClient: AxiosInstance) {}
 
   async getUserInfo(username: string): Promise<UserData | null> {

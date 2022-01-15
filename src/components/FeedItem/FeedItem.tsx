@@ -6,7 +6,6 @@ import VideoStatistics from './VideoStatistics'
 
 interface FeedItemProps {
   feed: Feed
-  size: number
   showDescription?: boolean
   onVideoEnd: () => void
 }
@@ -31,9 +30,12 @@ const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
         if (video.paused) {
           try {
             await video.play()
+            setIsPlaying(true)
           } catch (e) {}
-        } else video.pause()
-        setIsPlaying(!video.paused)
+        } else {
+          video.pause()
+          setIsPlaying(false)
+        }
       },
       [setIsPlaying]
     )

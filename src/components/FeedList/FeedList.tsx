@@ -24,7 +24,6 @@ const FeedList: FC<FeedListProps> = memo(
     showDescription = false,
   }) => {
     const [columns, setColumns] = useState<number>(currentColumns)
-    const itemSize = columns - 1
     const [isSmallScreen, setIsSmallScreen] = useState(false)
     const videoRefs = useRef<HTMLVideoElement[]>([])
 
@@ -109,7 +108,6 @@ const FeedList: FC<FeedListProps> = memo(
                 showDescription={
                   showDescription ? true : columns !== maxColumns
                 }
-                size={itemSize}
                 key={feed.id}
                 feed={feed}
                 onVideoEnd={() => onVideoEnd(index)}

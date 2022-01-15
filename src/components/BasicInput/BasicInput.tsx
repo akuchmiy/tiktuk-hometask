@@ -5,7 +5,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
 }
 
 const BasicInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { className, type, ...rest } = props
+  const { className = '', type, ...rest } = props
 
   return (
     <input

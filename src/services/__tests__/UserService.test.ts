@@ -16,7 +16,7 @@ describe('user service tests', () => {
     expect(user).toBeNull()
   })
 
-  it('should return data from is data.user present in response object', async () => {
+  it('should return data from the response object it data.user is present', async () => {
     mockedApiClient.get.mockResolvedValueOnce({ data: { user: 'dima' } })
 
     const user = await userService.getUserInfo('doesnt matter')
@@ -24,7 +24,7 @@ describe('user service tests', () => {
     expect(user).toEqual({ user: 'dima' })
   })
 
-  it('should return null if user is not present in response object', async () => {
+  it('should return null if user field is not present in the response data object', async () => {
     mockedApiClient.get.mockResolvedValueOnce({ data: { notUser: 'dima' } })
 
     const user = await userService.getUserInfo('doesnt matter')

@@ -8,12 +8,11 @@ interface FeedItemProps {
   feed: Feed
   size: number
   showDescription?: boolean
-  onVideoEnd: (index: number) => void
-  index: number
+  onVideoEnd: () => void
 }
 
 const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
-  ({ feed, showDescription = false, onVideoEnd, index }, ref) => {
+  ({ feed, showDescription = false, onVideoEnd }, ref) => {
     const [isPlaying, setIsPlaying] = useState(false)
 
     const playVideo = useCallback(
@@ -57,7 +56,7 @@ const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
             {feed.text}
           </span>
           <video
-            onEnded={() => onVideoEnd(index)}
+            onEnded={onVideoEnd}
             ref={ref}
             tabIndex={0}
             aria-label={

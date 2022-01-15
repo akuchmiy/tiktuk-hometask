@@ -112,8 +112,7 @@ const FeedList: FC<FeedListProps> = memo(
                 size={itemSize}
                 key={feed.id}
                 feed={feed}
-                index={index}
-                onVideoEnd={onVideoEnd}
+                onVideoEnd={() => onVideoEnd(index)}
               />
             ))}
             {!isSmallScreen && (

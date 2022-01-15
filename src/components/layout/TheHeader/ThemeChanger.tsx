@@ -30,27 +30,14 @@ const ThemeChanger: FC = () => {
   const classNames =
     'w-10 h-10 rounded-full absolute text-xl border-2 right-3 top-3'
   return (
-    <>
-      {!isDark ? (
-        <button
-          tabIndex={-1}
-          aria-hidden={true}
-          className={`text-black border-black ${classNames}`}
-          onClick={() => setIsDark(true)}
-        >
-          <FontAwesomeIcon icon={['fas', 'moon']} />
-        </button>
-      ) : (
-        <button
-          tabIndex={-1}
-          aria-hidden={true}
-          className={`text-white border-white ${classNames}`}
-          onClick={() => setIsDark(false)}
-        >
-          <FontAwesomeIcon icon={['fas', 'sun']} />
-        </button>
-      )}
-    </>
+    <button
+      tabIndex={-1}
+      aria-hidden={true}
+      className={`text-black border-black ${classNames}`}
+      onClick={isDark ? () => setIsDark(false) : () => setIsDark(true)}
+    >
+      <FontAwesomeIcon icon={isDark ? ['fas', 'sun'] : ['fas', 'moon']} />
+    </button>
   )
 }
 

@@ -22,4 +22,6 @@ const BasicInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   )
 })
 
+BasicInput.displayName = 'BasicInput'
+
 export default BasicInput

@@ -11,12 +11,13 @@ const UserInfo: FC<UserInfoProps> = ({ userData }) => {
   const { likes, followers, following } = useMemo(() => {
     const stats = userData?.stats
     if (stats) {
-      const likes = NumberService.formatNumber(stats.heart, 1)
-      const followers = NumberService.formatNumber(stats.followerCount, 1)
-      const following = NumberService.formatNumber(stats.followingCount, 1)
-      return { likes, followers, following }
+      return {
+        likes: NumberService.formatNumber(stats.heart, 1),
+        followers: NumberService.formatNumber(stats.followerCount, 1),
+        following: NumberService.formatNumber(stats.followingCount, 1),
+      }
     }
-    return { likes: '', followers: '', following: '' }
+    return { likes: '0', followers: '0', following: '0' }
   }, [userData])
 
   return (

@@ -1,15 +1,17 @@
 export interface UserData {
   user: User
-  stats: {
-    followerCount: number
-    followingCount: number
-    heart: number
-    videoCount: number
-    diggCount: number
-  }
+  stats: UserStats
 }
 
-interface User {
+export interface UserStats {
+  followerCount: number
+  followingCount: number
+  heart: number
+  videoCount: number
+  diggCount: number
+}
+
+export interface User {
   id: string
   uniqueId: string
   nickname: string

@@ -41,12 +41,6 @@ describe('FeedList tests', function () {
   let scrollSpy: jest.SpyInstance
 
   let mockUseSmallScreen: jest.Mock
-  let MockFeedItem: jest.Mocked<{
-    render: (
-      props: React.PropsWithChildren<FeedItemProps>,
-      ref: React.Ref<HTMLVideoElement>
-    ) => JSX.Element
-  }>
 
   beforeAll(() => {
     Object.defineProperty(window, 'IntersectionObserver', {
@@ -61,7 +55,7 @@ describe('FeedList tests', function () {
     }))
 
     FeedItem.displayName = 'FeedItem'
-    MockFeedItem = FeedItem as unknown as jest.Mocked<{
+    const MockFeedItem = FeedItem as unknown as jest.Mocked<{
       render: (
         props: React.PropsWithChildren<FeedItemProps>,
         ref: React.Ref<HTMLVideoElement>

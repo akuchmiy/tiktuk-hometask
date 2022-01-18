@@ -97,7 +97,7 @@ describe('ScrollToTop tests', function () {
     Object.defineProperty(window, 'innerHeight', { value: 100 })
 
     act(() => {
-      addListener.mock.calls.filter(filterOnScrollListener)[1][1]()
+      addListener.mock.calls.filter(filterOnScrollListener).pop()[1]()
     })
 
     wrapper.setProps({})

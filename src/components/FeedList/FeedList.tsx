@@ -2,8 +2,8 @@ import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import { Feed } from '../../models/Feed'
 import FeedItem from '../FeedItem/FeedItem'
 import FeedControls from './FeedControls'
-import configService from '../../config/configService'
 import TheLoader from '../TheLoader/TheLoader'
+import useSmallScreen from '../../hooks/useSmallScreen'
 
 interface FeedListProps {
   className?: string
@@ -24,7 +24,7 @@ const FeedList: FC<FeedListProps> = memo(
     showDescription = false,
   }) => {
     const [columns, setColumns] = useState<number>(currentColumns)
-    const [isSmallScreen, setIsSmallScreen] = useState(false)
+    const isSmallScreen = useSmallScreen()
     const videoRefs = useRef<HTMLVideoElement[]>([])
 
     const onVideoEnd = async (index: number) => {
@@ -73,24 +73,8 @@ const FeedList: FC<FeedListProps> = memo(
     }, [feedList])
 
     useEffect(() => {
-      const listener = () => {
-        if (
-          window.innerWidth < configService.FEED_LIST_BREAKPOINT &&
-          !isSmallScreen
-        ) {
-          setIsSmallScreen(true)
-          setColumns(1)
-        } else if (
-          window.innerWidth >= configService.FEED_LIST_BREAKPOINT &&
-          isSmallScreen
-        ) {
-          setIsSmallScreen(false)
-        }
-      }
-      listener()
-      window.addEventListener('resize', listener)
-      return () => window.removeEventListener('resize', listener)
-    }, [isSmallScreen, setIsSmallScreen, setColumns])
+      if (isSmallScreen) setColumns(1)
+    }, [isSmallScreen])
 
     return (
       <>

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useMemo } from 'react'
-import useQuery from '../../hooks/useQuery'
 import FeedList from './FeedList'
+import useQuery from '../../hooks/useQuery'
 import useFeed from '../../hooks/useFeed'
 
 interface WithDataProps {

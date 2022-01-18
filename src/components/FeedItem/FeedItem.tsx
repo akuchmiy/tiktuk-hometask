@@ -4,7 +4,7 @@ import './feedItem.css'
 import FeedDescription from './FeedDescription'
 import VideoStatistics from './VideoStatistics'
 
-interface FeedItemProps {
+export interface FeedItemProps {
   feed: Feed
   showDescription?: boolean
   onVideoEnd: () => void
@@ -87,5 +87,7 @@ const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
     )
   }
 )
+
+FeedItem.displayName = 'FeedItem'
 
 export default FeedItem

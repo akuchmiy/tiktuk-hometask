@@ -5,7 +5,7 @@ import FeedControls from './FeedControls'
 import TheLoader from '../TheLoader/TheLoader'
 import useSmallScreen from '../../hooks/useSmallScreen'
 
-interface FeedListProps {
+export interface FeedListProps {
   className?: string
   feedList: Feed[]
   currentColumns?: number
@@ -29,8 +29,8 @@ const FeedList: FC<FeedListProps> = memo(
 
     const onVideoEnd = async (index: number) => {
       if (index + 1 >= videoRefs.current.length) return
-      const nextVideo = videoRefs.current[index + 1]
 
+      const nextVideo = videoRefs.current[index + 1]
       try {
         await nextVideo.play()
       } catch (e) {}
@@ -89,9 +89,7 @@ const FeedList: FC<FeedListProps> = memo(
                 ref={(el) =>
                   (videoRefs.current[index] = el as HTMLVideoElement)
                 }
-                showDescription={
-                  showDescription ? true : columns !== maxColumns
-                }
+                showDescription={showDescription || columns !== maxColumns}
                 key={feed.id}
                 feed={feed}
                 onVideoEnd={() => onVideoEnd(index)}

@@ -3,8 +3,8 @@ import { FC } from 'react'
 import useSmallScreen from 'hooks/useSmallScreen'
 import { act } from 'react-dom/test-utils'
 
-jest.mock('config/configService', () => ({
-  FEED_LIST_BREAKPOINT: 300,
+jest.mock('shared/constants', () => ({
+  SMALL_SCREEN_BREAKPOINT: 300,
 }))
 
 const UseSmallScreenWrapper: FC = () => {

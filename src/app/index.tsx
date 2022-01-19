@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
-import TheHeader from './components/layout/TheHeader/TheHeader'
-import AppRoutes from './routes'
-import TheFooter from './components/layout/TheFooter/TheFooter'
-import ScrollToTop from './components/ScrollToTop/ScrollToTop'
-import './App.css'
+import TheHeader from 'components/layout/TheHeader/TheHeader'
+import AppRoutes from 'routes'
+import TheFooter from 'components/layout/TheFooter/TheFooter'
+import ScrollToTop from 'components/ScrollToTop/ScrollToTop'
+import { withProviders } from './providers'
+import 'app/styles/index.css'
 
 const App: FC = () => {
   return (
@@ -24,4 +25,4 @@ const App: FC = () => {
   )
 }
 
-export default App
+export default withProviders(App)

@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Yuji+Mai&display=swap');
+@import "./normalize.css";
+@import "./tailwind.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.font-yuji {
+    font-family: "Yuji Mai", serif;
+}

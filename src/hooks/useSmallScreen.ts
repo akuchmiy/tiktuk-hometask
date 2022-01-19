@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react'
-import configService from 'config/configService'
+import { SMALL_SCREEN_BREAKPOINT } from 'shared/constants'
 
 export default function useSmallScreen() {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   useEffect(() => {
     const listener = () => {
-      if (
-        window.innerWidth < configService.FEED_LIST_BREAKPOINT &&
-        !isSmallScreen
-      ) {
+      if (window.innerWidth < SMALL_SCREEN_BREAKPOINT && !isSmallScreen) {
         setIsSmallScreen(true)
       } else if (
-        window.innerWidth >= configService.FEED_LIST_BREAKPOINT &&
+        window.innerWidth >= SMALL_SCREEN_BREAKPOINT &&
         isSmallScreen
       ) {
         setIsSmallScreen(false)

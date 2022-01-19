@@ -8,6 +8,6 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
-.font-yuji {
-    font-family: "Yuji Mai", serif;
+#root {
+    min-height: 100vh;
 }

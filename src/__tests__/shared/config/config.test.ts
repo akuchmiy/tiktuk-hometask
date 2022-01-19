@@ -1,4 +1,4 @@
-import ConfigService from 'config/configService'
+import { getEnvVar } from '../../../shared/config'
 
 describe('configService test', () => {
   let key: string, envValue: string, missingKey: string
@@ -16,21 +16,21 @@ describe('configService test', () => {
   })
 
   it('getValue should return value from env', () => {
-    const value = ConfigService.getValue(key)
+    const value = getEnvVar(key)
 
     expect(value).toBe(envValue)
   })
 
   it('getValue should throw on missing env key', () => {
-    const value = () => ConfigService.getValue(missingKey)
+    const value = () => getEnvVar(missingKey)
 
     expect(value).toThrow(`Missing env variable ${missingKey}`)
   })
 
-  it('getValue should throw on empty value', () => {
+  it('getValue should not throw on empty value', () => {
     process.env[missingKey] = ''
-    const value = () => ConfigService.getValue(missingKey)
+    const value = getEnvVar(missingKey)
 
-    expect(value).toThrow(`Missing env variable ${missingKey}`)
+    expect(value).toBe('')
   })
 })

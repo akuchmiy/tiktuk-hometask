@@ -1,6 +1,6 @@
 import Enzyme, { shallow } from 'enzyme'
 import FeedItem from '../../../components/FeedItem/FeedItem'
-import { Feed } from '../../../models/Feed'
+import { Feed } from '../../../domain/Feed'
 
 const feed: Feed = {} as Feed
 

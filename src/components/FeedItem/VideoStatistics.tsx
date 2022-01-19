@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Feed } from '../../models/Feed'
+import { Feed } from '../../domain/Feed'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NumberService from '../../services/NumberService'
 

@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback, useState } from 'react'
-import { Feed } from '../../models/Feed'
+import { Feed } from '../../domain/Feed'
 import './feedItem.css'
 import FeedDescription from './FeedDescription'
 import VideoStatistics from './VideoStatistics'

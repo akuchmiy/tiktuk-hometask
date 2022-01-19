@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios'
-import { Feed } from '../models/Feed'
+import { Feed } from '../domain/Feed'
 import apiClient from './apiClient'
 
 export class FeedService {

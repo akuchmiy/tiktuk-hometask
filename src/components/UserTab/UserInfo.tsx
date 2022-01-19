@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import { UserData } from '../../models/UserData'
+import { UserData } from '../../domain/UserData'
 import NumberService from '../../services/NumberService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

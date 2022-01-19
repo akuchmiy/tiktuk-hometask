@@ -1,6 +1,6 @@
 import { mount, shallow } from 'enzyme'
 import FeedList from '../../../components/FeedList/FeedList'
-import { Feed } from '../../../models/Feed'
+import { Feed } from '../../../domain/Feed'
 import useSmallScreen from '../../../hooks/useSmallScreen'
 import React, { useEffect } from 'react'
 import FeedItem, { FeedItemProps } from '../../../components/FeedItem/FeedItem'

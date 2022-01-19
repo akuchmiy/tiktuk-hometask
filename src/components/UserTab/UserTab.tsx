@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import WithDataFeedList from '../FeedList/WithDataFeedList'
 import UserInfo from './UserInfo'
 import UserService from '../../services/UserService'
-import { UserData } from '../../models/UserData'
+import { UserData } from '../../domain/UserData'
 import TheLoader from '../TheLoader/TheLoader'
 
 const UserTab: FC = () => {

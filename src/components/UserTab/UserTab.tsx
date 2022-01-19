@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import WithDataFeedList from '../FeedList/WithDataFeedList'
+import WithDataFeedList from 'components/FeedList/WithDataFeedList'
 import UserInfo from './UserInfo'
-import UserService from '../../services/UserService'
-import { UserData } from '../../domain/UserData'
-import TheLoader from '../TheLoader/TheLoader'
+import UserService from 'services/UserService'
+import { UserData } from 'domain/UserData'
+import TheLoader from 'components/TheLoader/TheLoader'
 
 const UserTab: FC = () => {
   const { username } = useParams<'username'>()

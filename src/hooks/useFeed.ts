@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import FeedService from '../services/FeedService'
-import { Feed } from '../domain/Feed'
+import FeedService from 'services/FeedService'
+import { Feed } from 'domain/Feed'
 
 function useFeed(
   username: string | undefined,

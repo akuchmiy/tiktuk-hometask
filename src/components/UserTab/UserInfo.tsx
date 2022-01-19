@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react'
-import { UserData } from '../../domain/UserData'
-import NumberService from '../../services/NumberService'
+import { UserData } from 'domain/UserData'
+import NumberService from 'services/NumberService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface UserInfoProps {

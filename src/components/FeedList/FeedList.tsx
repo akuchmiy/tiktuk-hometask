@@ -2,8 +2,8 @@ import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import { Feed } from '../../domain/Feed'
 import FeedItem from '../FeedItem/FeedItem'
 import FeedControls from './FeedControls'
-import TheLoader from '../TheLoader/TheLoader'
-import useSmallScreen from '../../hooks/useSmallScreen'
+import TheLoader from 'components/TheLoader/TheLoader'
+import useSmallScreen from 'hooks/useSmallScreen'
 
 export interface FeedListProps {
   className?: string

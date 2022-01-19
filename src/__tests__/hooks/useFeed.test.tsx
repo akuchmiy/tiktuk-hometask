@@ -1,11 +1,11 @@
-import useFeed from '../../hooks/useFeed'
-import FeedService from '../../services/FeedService'
+import useFeed from 'hooks/useFeed'
+import FeedService from 'services/FeedService'
 import Enzyme, { mount } from 'enzyme'
 import { FC } from 'react'
-import { Feed } from '../../domain/Feed'
+import { Feed } from 'domain/Feed'
 import { act } from 'react-dom/test-utils'
 
-jest.mock('../../services/FeedService')
+jest.mock('services/FeedService')
 
 const mockFeedService = FeedService as jest.Mocked<typeof FeedService>
 

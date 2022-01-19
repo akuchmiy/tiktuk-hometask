@@ -1,7 +1,7 @@
-import apiClient from '../../services/apiClient'
-import { FeedService } from '../../services/FeedService'
+import apiClient from 'services/apiClient'
+import { FeedService } from 'services/FeedService'
 
-jest.mock('../../services/apiClient')
+jest.mock('services/apiClient')
 
 const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>
 const feedService = new FeedService(mockedApiClient)

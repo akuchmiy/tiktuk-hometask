@@ -1,4 +1,4 @@
-import ConfigService from '../../config/configService'
+import ConfigService from 'config/configService'
 
 describe('configService test', () => {
   let key: string, envValue: string, missingKey: string

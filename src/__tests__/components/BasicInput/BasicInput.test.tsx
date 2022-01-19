@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme'
-import BasicInput from '../../../components/BasicInput/BasicInput'
+import BasicInput from 'components/BasicInput/BasicInput'
 
 describe('BasicInput tests', () => {
   it('should render input with text type', function () {

@@ -1,5 +1,5 @@
 import { mount } from 'enzyme'
-import ThemeChanger from '../../../../components/layout/TheHeader/ThemeChanger'
+import ThemeChanger from 'components/layout/TheHeader/ThemeChanger'
 import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
 
 jest.mock('@fortawesome/react-fontawesome', () => ({

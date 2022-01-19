@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme'
-import FeedControls from '../../../components/FeedList/FeedControls'
+import FeedControls from 'components/FeedList/FeedControls'
 
 describe('', function () {
   const mockSetColumns = jest.fn()

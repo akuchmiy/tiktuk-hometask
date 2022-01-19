@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import UserTab from '../components/UserTab/UserTab'
-import WithDataFeedList from '../components/FeedList/WithDataFeedList'
+import UserTab from 'components/UserTab/UserTab'
+import WithDataFeedList from 'components/FeedList/WithDataFeedList'
 import NotFound from './NotFound'
 
 const AppRoutes: FC = () => {

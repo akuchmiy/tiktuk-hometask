@@ -1,28 +1,28 @@
 import { mount, shallow } from 'enzyme'
-import FeedList from '../../../components/FeedList/FeedList'
-import { Feed } from '../../../domain/Feed'
-import useSmallScreen from '../../../hooks/useSmallScreen'
+import FeedList from 'components/FeedList/FeedList'
+import { Feed } from 'domain/Feed'
+import useSmallScreen from 'hooks/useSmallScreen'
 import React, { useEffect } from 'react'
-import FeedItem, { FeedItemProps } from '../../../components/FeedItem/FeedItem'
+import FeedItem, { FeedItemProps } from 'components/FeedItem/FeedItem'
 import { act } from 'react-dom/test-utils'
 
 jest.mock(
-  '../../../components/TheLoader/TheLoader',
+  'components/TheLoader/TheLoader',
   () =>
     function TheLoader() {
       return <span>TheLoader</span>
     }
 )
 jest.mock(
-  '../../../components/FeedList/FeedControls',
+  'components/FeedList/FeedControls',
   () =>
     function FeedControls() {
       return <span>FeedControls</span>
     }
 )
-jest.mock('../../../components/FeedItem/FeedItem')
+jest.mock('components/FeedItem/FeedItem')
 
-jest.mock('../../../hooks/useSmallScreen')
+jest.mock('hooks/useSmallScreen')
 
 const feedList = [
   { id: '1' },

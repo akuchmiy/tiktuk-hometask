@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import configService from '../config/configService'
+import configService from 'config/configService'
 
 export default function useSmallScreen() {
   const [isSmallScreen, setIsSmallScreen] = useState(false)

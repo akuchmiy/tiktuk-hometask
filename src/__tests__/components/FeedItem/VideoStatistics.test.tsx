@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme'
-import VideoStatistics from '../../../components/FeedItem/VideoStatistics'
-import { Feed } from '../../../domain/Feed'
+import VideoStatistics from 'components/FeedItem/VideoStatistics'
+import { Feed } from 'domain/Feed'
 
-jest.mock('../../../services/NumberService', () => ({
+jest.mock('services/NumberService', () => ({
   formatNumber: (input: number) => input,
 }))
 

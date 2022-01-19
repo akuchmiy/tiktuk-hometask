@@ -1,4 +1,4 @@
-import NumberService from '../../services/NumberService'
+import NumberService from 'services/NumberService'
 
 describe('Number service tests', () => {
   it('should convert all types', () => {

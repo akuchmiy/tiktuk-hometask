@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios'
 import apiClient from './apiClient'
-import { UserData } from '../domain/UserData'
+import { UserData } from 'domain/UserData'
 
 export class UserService {
   constructor(private apiClient: AxiosInstance) {}

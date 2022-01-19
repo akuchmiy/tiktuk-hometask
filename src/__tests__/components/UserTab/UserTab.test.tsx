@@ -1,16 +1,16 @@
 import { mount, ReactWrapper } from 'enzyme'
-import UserTab from '../../../components/UserTab/UserTab'
+import UserTab from 'components/UserTab/UserTab'
 import { act } from 'react-dom/test-utils'
-import UserService from '../../../services/UserService'
+import UserService from 'services/UserService'
 import router from 'react-router-dom'
 
-jest.mock('../../../components/FeedList/WithDataFeedList', () => {
+jest.mock('components/FeedList/WithDataFeedList', () => {
   return function (props: any) {
     return <span className={'feed-list'}>{props.username}</span>
   }
 })
 
-jest.mock('../../../services/UserService')
+jest.mock('services/UserService')
 
 jest.mock('react-router-dom', () => ({
   useParams: jest.fn(),

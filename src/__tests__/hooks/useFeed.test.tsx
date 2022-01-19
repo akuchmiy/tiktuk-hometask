@@ -1,4 +1,4 @@
-import useFeed from '../useFeed'
+import useFeed from '../../hooks/useFeed'
 import FeedService from '../../services/FeedService'
 import Enzyme, { mount } from 'enzyme'
 import { FC } from 'react'

@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme'
-import VideoStatistics from '../VideoStatistics'
+import VideoStatistics from '../../../components/FeedItem/VideoStatistics'
 import { Feed } from '../../../models/Feed'
 
 jest.mock('../../../services/NumberService', () => ({

@@ -1,5 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme'
-import HeaderSearch from '../HeaderSearch'
+import HeaderSearch from '../../../../components/layout/TheHeader/HeaderSearch'
 
 let mockNavigate = jest.fn()
 jest.mock('react-router-dom', () => ({

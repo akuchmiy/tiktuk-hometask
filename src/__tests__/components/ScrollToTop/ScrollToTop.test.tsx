@@ -1,5 +1,5 @@
 import Enzyme, { mount } from 'enzyme'
-import ScrollToTop from '../ScrollToTop'
+import ScrollToTop from '../../../components/ScrollToTop/ScrollToTop'
 import { act } from 'react-dom/test-utils'
 
 jest.mock('@fortawesome/react-fontawesome', () => ({

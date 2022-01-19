@@ -1,5 +1,5 @@
 import Enzyme, { shallow } from 'enzyme'
-import UserInfo from '../UserInfo'
+import UserInfo from '../../../components/UserTab/UserInfo'
 import { User, UserData, UserStats } from '../../../models/UserData'
 
 jest.mock('../../../services/NumberService', () => ({

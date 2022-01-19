@@ -1,6 +1,6 @@
 import { mount, ReactWrapper, shallow } from 'enzyme'
 import { FC } from 'react'
-import useSmallScreen from '../useSmallScreen'
+import useSmallScreen from '../../hooks/useSmallScreen'
 import { act } from 'react-dom/test-utils'
 
 jest.mock('../../config/configService', () => ({

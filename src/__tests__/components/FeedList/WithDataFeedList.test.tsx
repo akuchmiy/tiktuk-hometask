@@ -1,12 +1,12 @@
 import { mount } from 'enzyme'
-import WithDataFeedList from '../WithDataFeedList'
+import WithDataFeedList from '../../../components/FeedList/WithDataFeedList'
 import useQuery from '../../../hooks/useQuery'
 import useFeed from '../../../hooks/useFeed'
 
 jest.mock('../../../hooks/useQuery')
 jest.mock('../../../hooks/useFeed')
 jest.mock(
-  '../FeedList',
+  '../../../components/FeedList/FeedList',
   () =>
     function FeedList() {
       return <span>FeedList</span>

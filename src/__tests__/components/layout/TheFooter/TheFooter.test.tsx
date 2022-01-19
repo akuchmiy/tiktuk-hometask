@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme'
-import TheFooter from '../TheFooter'
+import TheFooter from '../../../../components/layout/TheFooter/TheFooter'
 
 describe('TheFooter tests', () => {
   it('should contain application name', () => {

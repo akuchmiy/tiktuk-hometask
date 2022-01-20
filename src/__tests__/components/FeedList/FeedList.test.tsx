@@ -5,14 +5,11 @@ import React, { useEffect } from 'react'
 import FeedItem, { FeedItemProps } from 'components/FeedItem/FeedItem'
 import { act } from 'react-dom/test-utils'
 import { Feed } from 'shared/api'
+import Loader from 'shared/ui/Loader'
 
-jest.mock(
-  'shared/ui/Loader',
-  () =>
-    function Loader() {
-      return <span>Loader</span>
-    }
-)
+jest.mock('shared/ui/Loader')
+const mockLoader = Loader as jest.Mock
+
 jest.mock(
   'components/FeedList/FeedControls',
   () =>
@@ -49,6 +46,13 @@ describe('FeedList tests', function () {
   })
 
   beforeEach(() => {
+    mockLoader.mockImplementation(
+      ({
+        isLoading,
+        children,
+      }: React.PropsWithChildren<{ isLoading: boolean }>) => <>{children}</>
+    )
+
     mockObserver.mockImplementation(() => ({
       observe: mockObserve,
       disconnect: mockDisconnect,

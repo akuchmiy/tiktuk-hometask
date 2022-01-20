@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { formatNumber } from '../../shared/lib'
 
 interface UserInfoProps {
-  userData: UserData
+  userData: UserData | null
 }
 
 const UserInfo: FC<UserInfoProps> = ({ userData }) => {
@@ -35,16 +35,16 @@ const UserInfo: FC<UserInfoProps> = ({ userData }) => {
           <div className={'w-full h-full overflow-hidden rounded-3xl'}>
             <img
               className={'object-cover'}
-              src={userData.user.avatarMedium}
-              alt={`${userData.user.uniqueId} avatar`}
+              src={userData?.user.avatarMedium}
+              alt={`${userData?.user.uniqueId} avatar`}
             />
           </div>
         </div>
         <div>
           <div className={'mb-4'}>
             <h2 className={'text-3xl md:text-5xl mb-3'}>
-              <span>{userData.user.nickname}</span>
-              {userData.user.verified && (
+              <span>{userData?.user.nickname}</span>
+              {userData?.user.verified && (
                 <FontAwesomeIcon
                   className={'ml-4'}
                   icon={['fas', 'check-square']}
@@ -56,7 +56,7 @@ const UserInfo: FC<UserInfoProps> = ({ userData }) => {
                 'text-xl md:text-3xl sm:max-w-sm md:max-w-md xl:max-w-2xl break-words'
               }
             >
-              {userData.user.signature}
+              {userData?.user.signature}
             </p>
           </div>
           <ul

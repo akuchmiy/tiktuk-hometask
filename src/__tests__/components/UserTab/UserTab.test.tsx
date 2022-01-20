@@ -3,15 +3,18 @@ import UserTab from 'components/UserTab/UserTab'
 import { act } from 'react-dom/test-utils'
 import { getUserInfo } from 'shared/api'
 import router from 'react-router-dom'
+import React from 'react'
+import Loader from '../../../shared/ui/Loader'
 
 jest.mock('components/FeedList/WithDataFeedList', () => {
   return function (props: any) {
     return <span className={'feed-list'}>{props.username}</span>
   }
 })
+jest.mock('shared/ui/Loader')
+const mockLoader = Loader as jest.Mock
 
 jest.mock('shared/api')
-
 jest.mock('react-router-dom', () => ({
   useParams: jest.fn(),
 }))
@@ -21,6 +24,13 @@ const mockUseParams = (router as jest.Mocked<typeof router>).useParams
 
 describe('UserTab tests', function () {
   beforeEach(() => {
+    mockLoader.mockImplementation(
+      ({
+        isLoading,
+        children,
+      }: React.PropsWithChildren<{ isLoading: boolean }>) => <>{children}</>
+    )
+
     mockGetUserInfo.mockResolvedValue(42)
     mockUseParams.mockReturnValue({
       username: 'username',

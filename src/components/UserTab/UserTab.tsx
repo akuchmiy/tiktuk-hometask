@@ -27,12 +27,12 @@ const UserTab: FC = () => {
     <>
       {isError ? (
         <h1 className={'text-center m-auto text-4xl'}>Something went wrong</h1>
-      ) : userData ? (
-        <WithDataFeedList currentColumns={3} username={username}>
-          <UserInfo userData={userData} />
-        </WithDataFeedList>
       ) : (
-        <Loader className={'m-auto'} />
+        <Loader isLoading={!userData}>
+          <WithDataFeedList currentColumns={3} username={username}>
+            <UserInfo userData={userData} />
+          </WithDataFeedList>
+        </Loader>
       )}
     </>
   )

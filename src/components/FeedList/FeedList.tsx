@@ -77,35 +77,27 @@ const FeedList: FC<FeedListProps> = memo(
     }, [isSmallScreen])
 
     return (
-      <>
-        {feedList.length === 0 ? (
-          <div className={'w-full center flex-grow'}>
-            <Loader />
-          </div>
-        ) : (
-          <div className={`grid grid-cols-${columns} ${className}`}>
-            {feedList.map((feed, index) => (
-              <FeedItem
-                ref={(el) =>
-                  (videoRefs.current[index] = el as HTMLVideoElement)
-                }
-                showDescription={showDescription || columns !== maxColumns}
-                key={feed.id}
-                feed={feed}
-                onVideoEnd={() => onVideoEnd(index)}
-              />
-            ))}
-            {!isSmallScreen && (
-              <FeedControls
-                minColumns={minColumns}
-                maxColumns={maxColumns}
-                setColumns={setColumns}
-                columns={columns}
-              />
-            )}
-          </div>
-        )}
-      </>
+      <Loader isLoading={feedList.length === 0}>
+        <div className={`grid grid-cols-${columns} ${className}`}>
+          {feedList.map((feed, index) => (
+            <FeedItem
+              ref={(el) => (videoRefs.current[index] = el as HTMLVideoElement)}
+              showDescription={showDescription || columns !== maxColumns}
+              key={feed.id}
+              feed={feed}
+              onVideoEnd={() => onVideoEnd(index)}
+            />
+          ))}
+          {!isSmallScreen && (
+            <FeedControls
+              minColumns={minColumns}
+              maxColumns={maxColumns}
+              setColumns={setColumns}
+              columns={columns}
+            />
+          )}
+        </div>
+      </Loader>
     )
   }
 )

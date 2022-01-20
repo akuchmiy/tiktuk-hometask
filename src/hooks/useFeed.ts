@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Feed } from 'domain/Feed'
-import { getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
+import { Feed, getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
 
 function useFeed(
   username: string | undefined,

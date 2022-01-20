@@ -4,7 +4,7 @@ import WithDataFeedList from 'components/FeedList/WithDataFeedList'
 import UserInfo from './UserInfo'
 import UserService from 'services/UserService'
 import { UserData } from 'domain/UserData'
-import TheLoader from 'components/TheLoader/TheLoader'
+import Loader from 'shared/ui/Loader'
 
 const UserTab: FC = () => {
   const { username } = useParams<'username'>()
@@ -33,7 +33,7 @@ const UserTab: FC = () => {
           <UserInfo userData={userData} />
         </WithDataFeedList>
       ) : (
-        <TheLoader className={'m-auto'} />
+        <Loader className={'m-auto'} />
       )}
     </>
   )

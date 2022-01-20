@@ -2,7 +2,7 @@ import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import { Feed } from '../../domain/Feed'
 import FeedItem from '../FeedItem/FeedItem'
 import FeedControls from './FeedControls'
-import TheLoader from 'components/TheLoader/TheLoader'
+import Loader from 'shared/ui/Loader'
 import useSmallScreen from 'hooks/useSmallScreen'
 
 export interface FeedListProps {
@@ -80,7 +80,7 @@ const FeedList: FC<FeedListProps> = memo(
       <>
         {feedList.length === 0 ? (
           <div className={'w-full center flex-grow'}>
-            <TheLoader />
+            <Loader />
           </div>
         ) : (
           <div className={`grid grid-cols-${columns} ${className}`}>

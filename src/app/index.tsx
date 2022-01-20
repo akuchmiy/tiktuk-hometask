@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
 import TheHeader from 'components/layout/TheHeader/TheHeader'
-import AppRoutes from 'routes'
 import TheFooter from 'components/layout/TheFooter/TheFooter'
-import ScrollToTop from 'components/ScrollToTop/ScrollToTop'
+import ScrollToTop from 'shared/ui/ScrollToTop'
+import Routing from 'pages'
 import { withProviders } from './providers'
 import 'app/styles/index.css'
+import 'shared/config/registerFontAwesome'
 
 const App: FC = () => {
   return (
@@ -16,7 +17,7 @@ const App: FC = () => {
         }
       >
         <div className={'min-h-full flex flex-col main-container mx-auto pt-6'}>
-          <AppRoutes />
+          <Routing />
         </div>
       </main>
       <ScrollToTop />

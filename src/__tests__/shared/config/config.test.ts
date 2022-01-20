@@ -1,4 +1,4 @@
-import { getEnvVar } from '../../../shared/config'
+import { getEnvVar } from 'shared/config'
 
 describe('configService test', () => {
   let key: string, envValue: string, missingKey: string

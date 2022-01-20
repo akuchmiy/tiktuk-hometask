@@ -1,5 +1,3 @@
-import './registerFontAwesome'
-
 export const getEnvVar = (key: string) => {
   if (process.env[key] === undefined) {
     throw new Error(`Missing env variable ${key}`)

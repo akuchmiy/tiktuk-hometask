@@ -7,10 +7,10 @@ import FeedItem, { FeedItemProps } from 'components/FeedItem/FeedItem'
 import { act } from 'react-dom/test-utils'
 
 jest.mock(
-  'components/TheLoader/TheLoader',
+  'shared/ui/Loader',
   () =>
-    function TheLoader() {
-      return <span>TheLoader</span>
+    function Loader() {
+      return <span>Loader</span>
     }
 )
 jest.mock(
@@ -96,11 +96,11 @@ describe('FeedList tests', function () {
     expect(wrapper.find('FeedControls')).toHaveLength(1)
   })
 
-  it('should only render TheLoader', function () {
+  it('should only render Loader', function () {
     const wrapper = shallow(<FeedList feedList={[]} />)
 
     expect(wrapper.find('FeedItem')).toHaveLength(0)
-    expect(wrapper.find('TheLoader')).toHaveLength(1)
+    expect(wrapper.find('Loader')).toHaveLength(1)
   })
 
   it('should create an IntersectionObserver instance', async function () {

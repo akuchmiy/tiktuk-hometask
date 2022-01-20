@@ -2,9 +2,9 @@ import { FC } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import UserTab from 'components/UserTab/UserTab'
 import WithDataFeedList from 'components/FeedList/WithDataFeedList'
-import NotFound from './NotFound'
+import NotFound from 'pages/NotFound'
 
-const AppRoutes: FC = () => {
+const Routing: FC = () => {
   return (
     <Routes>
       <Route
@@ -17,4 +17,4 @@ const AppRoutes: FC = () => {
   )
 }
 
-export default AppRoutes
+export default Routing

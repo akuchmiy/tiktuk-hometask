@@ -4,7 +4,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   type?: string
 }
 
-const BasicInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { className = '', type, ...rest } = props
 
   return (
@@ -22,6 +22,6 @@ const BasicInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   )
 })
 
-BasicInput.displayName = 'BasicInput'
+Input.displayName = 'Input'
 
-export default BasicInput
+export default Input

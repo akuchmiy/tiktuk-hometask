@@ -38,7 +38,7 @@ describe('UserTab tests', function () {
       wrapper = await mount(<UserTab />)
     })
 
-    expect(wrapper.find('TheLoader')).toHaveLength(1)
+    expect(wrapper.find('Loader')).toHaveLength(1)
   })
 
   it('should render FeedList when data is loaded', async function () {

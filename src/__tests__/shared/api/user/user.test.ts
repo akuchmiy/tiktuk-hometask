@@ -1,7 +1,7 @@
-import { apiClient } from 'shared/api'
+import { apiClient } from 'shared/api/base'
 import { getUserInfo } from 'shared/api/user'
 
-jest.mock('shared/api')
+jest.mock('shared/api/base')
 
 const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>
 

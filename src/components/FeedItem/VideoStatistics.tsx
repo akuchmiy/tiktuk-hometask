@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { Feed } from 'domain/Feed'
+import { Feed } from 'shared/api'
+import { formatNumber } from 'shared/lib'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { formatNumber } from '../../shared/lib'
 
 interface VideoStatisticsProps {
   feed: Feed

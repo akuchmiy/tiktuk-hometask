@@ -1,4 +1,12 @@
-import { AuthorMeta } from './AuthorMeta'
+export interface AuthorMeta {
+  id: string
+  name: string
+  avatar: string
+  heart: number
+  video: number
+  fans: number
+  following: number
+}
 
 export interface Hashtag {
   id: string

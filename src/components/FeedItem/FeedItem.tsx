@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useState } from 'react'
-import { Feed } from 'domain/Feed'
 import FeedDescription from './FeedDescription'
 import VideoStatistics from './VideoStatistics'
+import { Feed } from 'shared/api'
 import './feedItem.css'
 
 export interface FeedItemProps {

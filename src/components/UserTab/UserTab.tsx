@@ -2,8 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import WithDataFeedList from 'components/FeedList/WithDataFeedList'
 import UserInfo from './UserInfo'
-import { getUserInfo } from 'shared/api'
-import { UserData } from 'domain/UserData'
+import { UserData, getUserInfo } from 'shared/api'
 import Loader from 'shared/ui/Loader'
 
 const UserTab: FC = () => {

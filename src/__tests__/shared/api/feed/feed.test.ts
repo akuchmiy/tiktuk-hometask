@@ -1,7 +1,7 @@
-import { apiClient } from 'shared/api'
-import { getHashtagFeed, getUserFeed, getTrendingFeed } from 'shared/api/feed'
+import { apiClient } from 'shared/api/base'
+import { getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api/feed'
 
-jest.mock('shared/api')
+jest.mock('shared/api/base')
 
 const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>
 

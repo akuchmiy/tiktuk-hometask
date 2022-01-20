@@ -1,5 +1,5 @@
-import { UserData } from 'domain/UserData'
-import { apiClient } from 'shared/api'
+import { apiClient } from 'shared/api/base'
+import { UserData } from './models'
 
 export async function getUserInfo(username: string): Promise<UserData | null> {
   try {

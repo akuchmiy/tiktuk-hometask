@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme'
 import VideoStatistics from 'components/FeedItem/VideoStatistics'
-import { Feed } from 'domain/Feed'
+import { Feed } from 'shared/api'
 
 jest.mock('shared/lib', () => ({
   formatNumber(input: number) {

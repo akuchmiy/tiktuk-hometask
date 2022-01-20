@@ -1,17 +1,17 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faCheckSquare,
-  faSearch,
-  faMusic,
-  faPlus,
-  faMinus,
   faAngleDoubleUp,
-  faSun,
-  faMoon,
-  faPlay,
-  faPause,
+  faCheckSquare,
   faComment,
   faHeart,
+  faMinus,
+  faMoon,
+  faMusic,
+  faPause,
+  faPlay,
+  faPlus,
+  faSearch,
+  faSun,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(

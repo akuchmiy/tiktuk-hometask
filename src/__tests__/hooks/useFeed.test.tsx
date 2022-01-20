@@ -1,8 +1,7 @@
 import useFeed from 'hooks/useFeed'
-import { getHashtagFeed, getUserFeed, getTrendingFeed } from 'shared/api'
+import { Feed, getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
 import Enzyme, { mount } from 'enzyme'
 import { FC } from 'react'
-import { Feed } from 'domain/Feed'
 import { act } from 'react-dom/test-utils'
 
 jest.mock('shared/api', () => ({

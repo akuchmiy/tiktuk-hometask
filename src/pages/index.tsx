@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import UserTab from 'components/UserTab/UserTab'
 import WithDataFeedList from 'components/FeedList/WithDataFeedList'
 import NotFound from 'pages/NotFound'

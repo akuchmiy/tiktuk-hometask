@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { AuthorMeta } from 'domain/AuthorMeta'
-import { Hashtag } from 'domain/Feed'
+import { AuthorMeta, Hashtag } from 'shared/api'
 
 interface FeedDescriptionProps {
   authorMeta: AuthorMeta

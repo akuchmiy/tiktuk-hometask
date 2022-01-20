@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme'
 import FeedDescription from 'components/FeedItem/FeedDescription'
-import { AuthorMeta } from 'domain/AuthorMeta'
-import { Hashtag } from 'domain/Feed'
+import { AuthorMeta, Hashtag } from 'shared/api'
 
 const authorMeta: AuthorMeta = {
   id: '1',

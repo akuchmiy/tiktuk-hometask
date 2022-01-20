@@ -1,6 +1,6 @@
-import { Feed } from 'domain/Feed'
-import { apiClient } from 'shared/api'
+import { apiClient } from 'shared/api/base'
 import { AxiosRequestConfig } from 'axios'
+import { Feed } from './models'
 
 export async function getTrendingFeed(): Promise<Feed[]> {
   return getFeed('/trending/feed')

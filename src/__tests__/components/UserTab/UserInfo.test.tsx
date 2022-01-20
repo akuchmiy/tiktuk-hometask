@@ -1,6 +1,6 @@
 import Enzyme, { shallow } from 'enzyme'
 import UserInfo from 'components/UserTab/UserInfo'
-import { User, UserData, UserStats } from 'domain/UserData'
+import { User, UserData, UserStats } from 'shared/api'
 
 jest.mock('shared/lib', () => ({
   formatNumber(input: number) {

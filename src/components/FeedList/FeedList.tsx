@@ -1,5 +1,5 @@
 import React, { FC, memo, useEffect, useRef, useState } from 'react'
-import { Feed } from '../../domain/Feed'
+import { Feed } from 'shared/api'
 import FeedItem from '../FeedItem/FeedItem'
 import FeedControls from './FeedControls'
 import Loader from 'shared/ui/Loader'

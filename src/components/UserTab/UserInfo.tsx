@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import { UserData } from 'domain/UserData'
+import { UserData } from 'shared/api'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { formatNumber } from '../../shared/lib'
 

@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react'
 import { UserData } from 'domain/UserData'
-import NumberService from 'services/NumberService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { formatNumber } from '../../shared/lib'
 
 interface UserInfoProps {
   userData: UserData
@@ -12,9 +12,9 @@ const UserInfo: FC<UserInfoProps> = ({ userData }) => {
     const stats = userData?.stats
     if (stats) {
       return {
-        likes: NumberService.formatNumber(stats.heart, 1),
-        followers: NumberService.formatNumber(stats.followerCount, 1),
-        following: NumberService.formatNumber(stats.followingCount, 1),
+        likes: formatNumber(stats.heart, 1),
+        followers: formatNumber(stats.followerCount, 1),
+        following: formatNumber(stats.followingCount, 1),
       }
     }
     return { likes: '0', followers: '0', following: '0' }

@@ -2,8 +2,10 @@ import Enzyme, { shallow } from 'enzyme'
 import UserInfo from 'components/UserTab/UserInfo'
 import { User, UserData, UserStats } from 'domain/UserData'
 
-jest.mock('services/NumberService', () => ({
-  formatNumber: (num: number) => num,
+jest.mock('shared/lib', () => ({
+  formatNumber(input: number) {
+    return input
+  },
 }))
 
 describe('UserInfo tests', function () {

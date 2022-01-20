@@ -1,13 +1,19 @@
 import useFeed from 'hooks/useFeed'
-import FeedService from 'services/FeedService'
+import { getHashtagFeed, getUserFeed, getTrendingFeed } from 'shared/api'
 import Enzyme, { mount } from 'enzyme'
 import { FC } from 'react'
 import { Feed } from 'domain/Feed'
 import { act } from 'react-dom/test-utils'
 
-jest.mock('services/FeedService')
+jest.mock('shared/api', () => ({
+  getHashtagFeed: jest.fn(),
+  getUserFeed: jest.fn(),
+  getTrendingFeed: jest.fn(),
+}))
 
-const mockFeedService = FeedService as jest.Mocked<typeof FeedService>
+const mockGetHashtagFeed = getHashtagFeed as jest.Mock
+const mockGetUserFeed = getUserFeed as jest.Mock
+const mockGetTrendingFeed = getTrendingFeed as jest.Mock
 
 interface UseFeedProps {
   username: string | undefined
@@ -34,16 +40,9 @@ describe('useQuery tests', function () {
   beforeEach(async () => {
     const returnData = ['data', 'data']
 
-    mockFeedService.getUserFeed.mockResolvedValue(
-      returnData as unknown as Feed[]
-    )
-
-    mockFeedService.getHashtagFeed.mockResolvedValue(
-      returnData as unknown as Feed[]
-    )
-    mockFeedService.getTrendingFeed.mockResolvedValue(
-      returnData as unknown as Feed[]
-    )
+    mockGetUserFeed.mockResolvedValue(returnData as unknown as Feed[])
+    mockGetHashtagFeed.mockResolvedValue(returnData as unknown as Feed[])
+    mockGetTrendingFeed.mockResolvedValue(returnData as unknown as Feed[])
 
     const username = undefined
     const query = null
@@ -66,7 +65,7 @@ describe('useQuery tests', function () {
       await mount(<UseFeedWrapper username={username} query={query} />)
     })
 
-    expect(mockFeedService.getUserFeed).toBeCalledWith(username)
+    expect(mockGetUserFeed).toBeCalledWith(username)
   })
 
   it('should call getHashtagFeed when query is not null', async function () {
@@ -76,11 +75,11 @@ describe('useQuery tests', function () {
       await mount(<UseFeedWrapper username={username} query={query} />)
     })
 
-    expect(mockFeedService.getHashtagFeed).toBeCalledWith(query)
+    expect(mockGetHashtagFeed).toBeCalledWith(query)
   })
 
   it('should call getTrendingFeed when query and username are not provided', async function () {
-    expect(mockFeedService.getTrendingFeed).toBeCalled()
+    expect(mockGetTrendingFeed).toBeCalled()
   })
 
   it('should initial render without error', async function () {
@@ -92,7 +91,7 @@ describe('useQuery tests', function () {
   })
 
   it('should return error when data length is 0', async function () {
-    mockFeedService.getTrendingFeed.mockResolvedValue([] as unknown as Feed[])
+    mockGetTrendingFeed.mockResolvedValue([] as unknown as Feed[])
     const username = undefined
     const query = null
     let wrapper: Enzyme.ReactWrapper

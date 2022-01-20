@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Feed } from 'domain/Feed'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import NumberService from 'services/NumberService'
+import { formatNumber } from '../../shared/lib'
 
 interface VideoStatisticsProps {
   feed: Feed
@@ -24,7 +24,7 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
       >
         <FontAwesomeIcon className={'text-md'} icon={['fas', 'heart']} />
         <br />
-        <span>{NumberService.formatNumber(feed.diggCount, 1)}</span>
+        <span>{formatNumber(feed.diggCount, 1)}</span>
       </button>
       <button
         aria-label={'Comments'}
@@ -34,7 +34,7 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
       >
         <FontAwesomeIcon className={'text-md'} icon={['fas', 'comment']} />
         <br />
-        <span>{NumberService.formatNumber(feed.commentCount, 1)}</span>
+        <span>{formatNumber(feed.commentCount, 1)}</span>
       </button>
     </div>
   )

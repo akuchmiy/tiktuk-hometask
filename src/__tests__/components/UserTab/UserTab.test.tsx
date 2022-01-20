@@ -1,7 +1,7 @@
 import { mount, ReactWrapper } from 'enzyme'
 import UserTab from 'components/UserTab/UserTab'
 import { act } from 'react-dom/test-utils'
-import UserService from 'services/UserService'
+import { getUserInfo } from 'shared/api'
 import router from 'react-router-dom'
 
 jest.mock('components/FeedList/WithDataFeedList', () => {
@@ -10,25 +10,25 @@ jest.mock('components/FeedList/WithDataFeedList', () => {
   }
 })
 
-jest.mock('services/UserService')
+jest.mock('shared/api')
 
 jest.mock('react-router-dom', () => ({
   useParams: jest.fn(),
 }))
 
-const mockGetInfo = (UserService as jest.Mocked<typeof UserService>).getUserInfo
+const mockGetUserInfo = getUserInfo as jest.Mock
 const mockUseParams = (router as jest.Mocked<typeof router>).useParams
 
 describe('UserTab tests', function () {
   beforeEach(() => {
-    mockGetInfo.mockResolvedValue(42)
+    mockGetUserInfo.mockResolvedValue(42)
     mockUseParams.mockReturnValue({
       username: 'username',
     })
   })
 
   afterEach(() => {
-    mockGetInfo.mockClear()
+    mockGetUserInfo.mockClear()
     mockUseParams.mockClear()
   })
 
@@ -54,7 +54,7 @@ describe('UserTab tests', function () {
   })
 
   it('should render error when data is null', async function () {
-    mockGetInfo.mockResolvedValue(null)
+    mockGetUserInfo.mockResolvedValue(null)
     let wrapper: ReactWrapper
 
     await act(async () => {

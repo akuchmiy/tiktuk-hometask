@@ -1,14 +1,13 @@
-import apiClient from 'services/apiClient'
-import { FeedService } from 'services/FeedService'
+import { apiClient } from 'shared/api'
+import { getHashtagFeed, getUserFeed, getTrendingFeed } from 'shared/api/feed'
 
-jest.mock('services/apiClient')
+jest.mock('shared/api')
 
 const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>
-const feedService = new FeedService(mockedApiClient)
 
 describe('feedService tests', () => {
   it('should call apiClient with trending feed url and return empty array on empty data', async () => {
-    const result = await feedService.getTrendingFeed()
+    const result = await getTrendingFeed()
 
     expect(mockedApiClient.get.mock.calls[0][0]).toBe('/trending/feed')
     expect(result).toEqual([])
@@ -17,7 +16,7 @@ describe('feedService tests', () => {
   it('should return empty array if response data is not an array', async () => {
     mockedApiClient.get.mockResolvedValueOnce({ data: { notAnArray: true } })
 
-    const result = await feedService.getTrendingFeed()
+    const result = await getTrendingFeed()
 
     expect(result).toEqual([])
   })
@@ -25,7 +24,7 @@ describe('feedService tests', () => {
   it('should return response data if it is an array', async () => {
     mockedApiClient.get.mockResolvedValueOnce({ data: ['data'] })
 
-    const result = await feedService.getTrendingFeed()
+    const result = await getTrendingFeed()
 
     expect(result).toEqual(['data'])
   })
@@ -33,7 +32,7 @@ describe('feedService tests', () => {
   it('should call apiClient with user feed url', async () => {
     const username = 'Dima'
 
-    await feedService.getUserFeed(username)
+    await getUserFeed(username)
 
     expect(mockedApiClient.get.mock.calls[0][0]).toBe(`/user/feed/${username}`)
   })
@@ -41,7 +40,7 @@ describe('feedService tests', () => {
   it('should call apiClient with hashtag feed url', async () => {
     const hashtag = '#tag'
 
-    await feedService.getHashtagFeed(hashtag)
+    await getHashtagFeed(hashtag)
 
     expect(mockedApiClient.get.mock.calls[0][0]).toBe(
       `/hashtag/feed/${hashtag}`

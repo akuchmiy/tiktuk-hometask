@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import WithDataFeedList from 'components/FeedList/WithDataFeedList'
 import UserInfo from './UserInfo'
-import UserService from 'services/UserService'
+import { getUserInfo } from 'shared/api'
 import { UserData } from 'domain/UserData'
 import Loader from 'shared/ui/Loader'
 
@@ -18,7 +18,7 @@ const UserTab: FC = () => {
         return setIsError(true)
       }
 
-      const data = await UserService.getUserInfo(username)
+      const data = await getUserInfo(username)
       if (!data) setIsError(true)
       setUserData(data)
     })()

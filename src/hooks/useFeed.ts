@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import FeedService from 'services/FeedService'
 import { Feed } from 'domain/Feed'
+import { getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
 
 function useFeed(
   username: string | undefined,
@@ -11,10 +11,10 @@ function useFeed(
 
   const fetchFeed = useCallback(() => {
     if (username && process.env.NODE_ENV === 'production')
-      return FeedService.getUserFeed(username)
-    if (queryParam) return FeedService.getHashtagFeed(queryParam)
+      return getUserFeed(username)
+    if (queryParam) return getHashtagFeed(queryParam)
 
-    return FeedService.getTrendingFeed()
+    return getTrendingFeed()
   }, [username, queryParam])
 
   useEffect(() => {

@@ -11,10 +11,10 @@ jest.mock('shared/ui/Loader')
 const mockLoader = Loader as jest.Mock
 
 jest.mock(
-  'components/FeedList/FeedControls',
+  'shared/ui/AmountChanger',
   () =>
-    function FeedControls() {
-      return <span>FeedControls</span>
+    function AmountChanger() {
+      return <span>AmountChanger</span>
     }
 )
 jest.mock('components/FeedItem/FeedItem')
@@ -85,19 +85,19 @@ describe('FeedList tests', function () {
     scrollSpy = jest.spyOn(window, 'scrollTo')
   })
 
-  it('should render FeedItems without FeedControls', function () {
+  it('should render FeedItems without AmountChanger', function () {
     const wrapper = shallow(<FeedList feedList={feedList} />)
 
     expect(wrapper.find('FeedItem')).toHaveLength(feedList.length)
-    expect(wrapper.find('FeedControls')).toHaveLength(0)
+    expect(wrapper.find('AmountChanger')).toHaveLength(0)
   })
 
-  it('should render FeedItems with FeedControls', function () {
+  it('should render FeedItems with AmountChanger', function () {
     mockUseSmallScreen.mockReturnValueOnce(false)
     const wrapper = shallow(<FeedList feedList={feedList} />)
 
     expect(wrapper.find('FeedItem')).toHaveLength(feedList.length)
-    expect(wrapper.find('FeedControls')).toHaveLength(1)
+    expect(wrapper.find('AmountChanger')).toHaveLength(1)
   })
 
   it('should only render Loader', function () {

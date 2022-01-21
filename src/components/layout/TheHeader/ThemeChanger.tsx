@@ -2,7 +2,8 @@ import React, { FC, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ThemeChanger: FC = () => {
-  const [isDark, setIsDark] = useState(false)
+  const hasDarkClass = document.documentElement.classList.contains('dark')
+  const [isDark, setIsDark] = useState(hasDarkClass)
 
   useEffect(() => {
     if (isDark) {
@@ -33,7 +34,7 @@ const ThemeChanger: FC = () => {
     <button
       tabIndex={-1}
       aria-hidden={true}
-      className={`text-black border-black ${classNames}`}
+      className={`text-black dark:text-white border-black dark:border-white ${classNames}`}
       onClick={isDark ? () => setIsDark(false) : () => setIsDark(true)}
     >
       <FontAwesomeIcon icon={isDark ? ['fas', 'sun'] : ['fas', 'moon']} />

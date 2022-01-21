@@ -1,8 +1,8 @@
 import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import { Feed } from 'shared/api'
-import FeedItem from '../FeedItem/FeedItem'
-import FeedControls from './FeedControls'
+import FeedItem from 'components/FeedItem/FeedItem'
 import Loader from 'shared/ui/Loader'
+import AmountChanger from 'shared/ui/AmountChanger'
 import useSmallScreen from 'hooks/useSmallScreen'
 
 export interface FeedListProps {
@@ -89,11 +89,15 @@ const FeedList: FC<FeedListProps> = memo(
             />
           ))}
           {!isSmallScreen && (
-            <FeedControls
-              minColumns={minColumns}
-              maxColumns={maxColumns}
-              setColumns={setColumns}
-              columns={columns}
+            <AmountChanger
+              minAmount={minColumns}
+              maxAmount={maxColumns}
+              setAmount={setColumns}
+              amount={columns}
+              className={
+                'fixed top-1/3 right-2 p-1 flex flex-col text-xl bg-pink-200 border-2 border-pink-300 rounded-2xl text-gray-700 ' +
+                'dark:text-gray-100 dark:bg-gray-700 dark:border-gray-300'
+              }
             />
           )}
         </div>

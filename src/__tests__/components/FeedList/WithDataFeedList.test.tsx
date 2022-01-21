@@ -1,9 +1,9 @@
 import { mount } from 'enzyme'
 import WithDataFeedList from 'components/FeedList/WithDataFeedList'
-import useQuery from 'hooks/useQuery'
+import useQuery from 'shared/hooks/useQuery'
 import useFeed from 'hooks/useFeed'
 
-jest.mock('hooks/useQuery')
+jest.mock('shared/hooks/useQuery')
 jest.mock('hooks/useFeed')
 jest.mock(
   'components/FeedList/FeedList',
@@ -24,7 +24,11 @@ describe('WithDataFeedList tests', function () {
       },
     })
 
-    mockUseFeed.mockReturnValue([['feedlist'], false])
+    mockUseFeed.mockReturnValue({
+      feed: ['feedlist'],
+      error: false,
+      isLoading: false,
+    })
   })
 
   it('should change document title to username`s profile', async function () {
@@ -53,14 +57,17 @@ describe('WithDataFeedList tests', function () {
   })
 
   it('should not display error', async function () {
-    mockUseFeed.mockReturnValueOnce([['feedlist'], false])
     const wrapper = await mount(<WithDataFeedList />)
 
     expect(wrapper.find('h1').text()).not.toContain('Something went wrong')
   })
 
   it('should display error', async function () {
-    mockUseFeed.mockReturnValueOnce([['feedlist'], true])
+    mockUseFeed.mockReturnValueOnce({
+      feed: null,
+      error: true,
+      isLoading: false,
+    })
     const wrapper = await mount(<WithDataFeedList />)
 
     expect(wrapper.find('h1').text()).toContain('Something went wrong')

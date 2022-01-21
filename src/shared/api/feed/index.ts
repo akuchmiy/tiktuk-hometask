@@ -17,11 +17,10 @@ export async function getHashtagFeed(hashtag: string): Promise<Feed[]> {
 async function getFeed(url: string, config?: AxiosRequestConfig) {
   try {
     const { data } = await apiClient.get<Feed[]>(url, config)
-    if (!Array.isArray(data)) {
-      return []
-    }
+
     return data
-  } catch (e) {
-    return []
+  } catch (e: any) {
+    if (e instanceof Error) throw new Error(e.message)
+    else throw new Error('Unexpected error')
   }
 }

@@ -1,6 +1,6 @@
 import { mount, shallow } from 'enzyme'
 import FeedList from 'components/FeedList/FeedList'
-import useSmallScreen from 'hooks/useSmallScreen'
+import useSmallScreen from 'shared/hooks/useSmallScreen'
 import React, { useEffect } from 'react'
 import FeedItem, { FeedItemProps } from 'components/FeedItem/FeedItem'
 import { act } from 'react-dom/test-utils'
@@ -19,7 +19,7 @@ jest.mock(
 )
 jest.mock('components/FeedItem/FeedItem')
 
-jest.mock('hooks/useSmallScreen')
+jest.mock('shared/hooks/useSmallScreen')
 
 const feedList = [
   { id: '1' },
@@ -100,11 +100,10 @@ describe('FeedList tests', function () {
     expect(wrapper.find('AmountChanger')).toHaveLength(1)
   })
 
-  it('should only render Loader', function () {
+  it('should not render FeedItems', function () {
     const wrapper = shallow(<FeedList feedList={[]} />)
 
     expect(wrapper.find('FeedItem')).toHaveLength(0)
-    expect(wrapper.find('Loader')).toHaveLength(1)
   })
 
   it('should create an IntersectionObserver instance', async function () {

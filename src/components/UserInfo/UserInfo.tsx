@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react'
-import { UserData } from 'shared/api'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { formatNumber } from '../../shared/lib'
+import { formatNumber } from 'shared/lib'
+import { UserData } from 'shared/api'
 
 interface UserInfoProps {
   userData: UserData | null

@@ -1,7 +1,9 @@
 import React, { FC, useEffect, useMemo } from 'react'
 import FeedList from './FeedList'
-import useQuery from 'hooks/useQuery'
+import Loader from 'shared/ui/Loader'
+import useQuery from 'shared/hooks/useQuery'
 import useFeed from 'hooks/useFeed'
+import { Feed } from 'shared/api'
 
 interface WithDataProps {
   username?: string
@@ -21,7 +23,7 @@ const WithDataFeedList: FC<WithDataProps> = ({
 }) => {
   const query = useQuery()
   const queryParam = useMemo(() => query.get('query'), [query])
-  const [feedList, isError] = useFeed(username, queryParam)
+  const { feed, error, isLoading } = useFeed(username, queryParam)
 
   const newTitle = useMemo(() => {
     if (username) return `${username}'s profile`
@@ -36,7 +38,7 @@ const WithDataFeedList: FC<WithDataProps> = ({
 
   return (
     <>
-      {isError ? (
+      {error ? (
         <h1 className={'text-center m-auto text-4xl'}>Something went wrong</h1>
       ) : (
         <>
@@ -48,14 +50,16 @@ const WithDataFeedList: FC<WithDataProps> = ({
             {newTitle}
           </h1>
           {children}
-          <FeedList
-            showDescription={showDescription}
-            currentColumns={currentColumns}
-            minColumns={minColumns}
-            maxColumns={maxColumns}
-            className={'gap-4 gap-y-20'}
-            feedList={feedList}
-          />
+          <Loader isLoading={isLoading || !feed}>
+            <FeedList
+              showDescription={showDescription}
+              currentColumns={currentColumns}
+              minColumns={minColumns}
+              maxColumns={maxColumns}
+              className={'gap-4 gap-y-20'}
+              feedList={feed as Feed[]}
+            />
+          </Loader>
         </>
       )}
     </>

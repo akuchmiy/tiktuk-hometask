@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useMemo } from 'react'
 import Input from 'shared/ui/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import useInput from 'hooks/useInput'
+import useInput from 'shared/hooks/useInput'
 import { useNavigate } from 'react-router-dom'
 
 const HeaderSearch: FC = () => {

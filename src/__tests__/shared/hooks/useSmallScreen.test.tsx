@@ -1,6 +1,6 @@
 import { mount, ReactWrapper } from 'enzyme'
 import { FC } from 'react'
-import useSmallScreen from 'hooks/useSmallScreen'
+import useSmallScreen from 'shared/hooks/useSmallScreen'
 import { act } from 'react-dom/test-utils'
 
 jest.mock('shared/constants', () => ({

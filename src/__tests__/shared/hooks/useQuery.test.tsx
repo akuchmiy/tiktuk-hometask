@@ -1,4 +1,4 @@
-import useQuery from 'hooks/useQuery'
+import useQuery from 'shared/hooks/useQuery'
 import { shallow } from 'enzyme'
 
 jest.mock('react-router-dom', () => ({

@@ -1,13 +1,8 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import { Feed, getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
+import useAsync from 'shared/hooks/useAsync'
 
-function useFeed(
-  username: string | undefined,
-  queryParam: string | null
-): [Feed[], boolean] {
-  const [feedList, setFeedList] = useState<Feed[]>([])
-  const [isError, setIsError] = useState(false)
-
+function useFeed(username: string | undefined, queryParam: string | null) {
   const fetchFeed = useCallback(() => {
     if (username && process.env.NODE_ENV === 'production')
       return getUserFeed(username)
@@ -16,18 +11,9 @@ function useFeed(
     return getTrendingFeed()
   }, [username, queryParam])
 
-  useEffect(() => {
-    setIsError(false)
-    setFeedList([])
-    ;(async () => {
-      const data = await fetchFeed()
+  const { data, error, isLoading, execute } = useAsync<Feed[], Error>(fetchFeed)
 
-      if (data.length === 0) setIsError(true)
-      setFeedList(data)
-    })()
-  }, [fetchFeed, setFeedList])
-
-  return [feedList, isError]
+  return { feed: data, error, isLoading, execute }
 }
 
 export default useFeed

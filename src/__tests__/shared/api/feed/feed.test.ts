@@ -6,24 +6,18 @@ jest.mock('shared/api/base')
 const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>
 
 describe('feedService tests', () => {
+  beforeEach(() => {
+    mockedApiClient.get.mockResolvedValue({ data: ['data'] })
+  })
+
   it('should call apiClient with trending feed url and return empty array on empty data', async () => {
     const result = await getTrendingFeed()
 
     expect(mockedApiClient.get.mock.calls[0][0]).toBe('/trending/feed')
-    expect(result).toEqual([])
+    expect(result).toEqual(['data'])
   })
 
-  it('should return empty array if response data is not an array', async () => {
-    mockedApiClient.get.mockResolvedValueOnce({ data: { notAnArray: true } })
-
-    const result = await getTrendingFeed()
-
-    expect(result).toEqual([])
-  })
-
-  it('should return response data if it is an array', async () => {
-    mockedApiClient.get.mockResolvedValueOnce({ data: ['data'] })
-
+  it('should return response data', async () => {
     const result = await getTrendingFeed()
 
     expect(result).toEqual(['data'])

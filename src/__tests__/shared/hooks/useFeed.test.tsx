@@ -3,12 +3,17 @@ import { Feed, getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
 import Enzyme, { mount } from 'enzyme'
 import { FC } from 'react'
 import { act } from 'react-dom/test-utils'
+import useAsync from 'shared/hooks/useAsync'
 
 jest.mock('shared/api', () => ({
   getHashtagFeed: jest.fn(),
   getUserFeed: jest.fn(),
   getTrendingFeed: jest.fn(),
 }))
+
+jest.mock('shared/hooks/useAsync')
+
+const mockUseAsync = useAsync as jest.Mock
 
 const mockGetHashtagFeed = getHashtagFeed as jest.Mock
 const mockGetUserFeed = getUserFeed as jest.Mock
@@ -20,37 +25,28 @@ interface UseFeedProps {
 }
 
 const UseFeedWrapper: FC<UseFeedProps> = ({ username, query }) => {
-  const [feed, isError] = useFeed(username, query)
+  useFeed(username, query)
 
-  return (
-    <>
-      <span className={'feed'}>{feed}</span>
-      <span className={'error'}>{isError ? 'true' : 'false'}</span>
-    </>
-  )
+  return <span>useFeed</span>
 }
 
-describe('useQuery tests', function () {
+describe('useFeed tests', function () {
   let wrapper: Enzyme.ReactWrapper
   beforeAll(() => {
     process.env.NODE_ENV = 'production'
   })
 
   beforeEach(async () => {
-    const returnData = ['data', 'data']
-
-    mockGetUserFeed.mockResolvedValue(returnData as unknown as Feed[])
-    mockGetHashtagFeed.mockResolvedValue(returnData as unknown as Feed[])
-    mockGetTrendingFeed.mockResolvedValue(returnData as unknown as Feed[])
-
-    const username = undefined
-    const query = null
-
-    await act(async () => {
-      wrapper = await mount(
-        <UseFeedWrapper username={username} query={query} />
-      )
+    mockUseAsync.mockResolvedValue({
+      data: null,
+      error: null,
+      isLoading: false,
+      execute: () => null,
     })
+
+    mockGetUserFeed.mockResolvedValue(['user'] as unknown as Feed[])
+    mockGetHashtagFeed.mockResolvedValue(['hashtag'] as unknown as Feed[])
+    mockGetTrendingFeed.mockResolvedValue(['trending'] as unknown as Feed[])
   })
 
   afterAll(() => {
@@ -64,6 +60,9 @@ describe('useQuery tests', function () {
       await mount(<UseFeedWrapper username={username} query={query} />)
     })
 
+    const lastFetchFeedFunction = mockUseAsync.mock.calls.pop()[0]
+    lastFetchFeedFunction()
+
     expect(mockGetUserFeed).toBeCalledWith(username)
   })
 
@@ -74,33 +73,22 @@ describe('useQuery tests', function () {
       await mount(<UseFeedWrapper username={username} query={query} />)
     })
 
+    const lastFetchFeedFunction = mockUseAsync.mock.calls.pop()[0]
+    lastFetchFeedFunction()
+
     expect(mockGetHashtagFeed).toBeCalledWith(query)
   })
 
   it('should call getTrendingFeed when query and username are not provided', async function () {
-    expect(mockGetTrendingFeed).toBeCalled()
-  })
-
-  it('should initial render without error', async function () {
-    expect(wrapper.find('.error').text()).toBe('false')
-  })
-
-  it('should render feedList when fetch was successful', async function () {
-    expect(wrapper.find('.feed').text()).toBe('datadata')
-  })
-
-  it('should return error when data length is 0', async function () {
-    mockGetTrendingFeed.mockResolvedValue([] as unknown as Feed[])
     const username = undefined
     const query = null
-    let wrapper: Enzyme.ReactWrapper
-
     await act(async () => {
-      wrapper = await mount(
-        <UseFeedWrapper username={username} query={query} />
-      )
+      await mount(<UseFeedWrapper username={username} query={query} />)
     })
 
-    expect(wrapper.find('.error').text()).toBe('true')
+    const lastFetchFeedFunction = mockUseAsync.mock.calls.pop()[0]
+    lastFetchFeedFunction()
+
+    expect(mockGetTrendingFeed).toBeCalled()
   })
 })

@@ -1,9 +1,8 @@
 import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import { Feed } from 'shared/api'
 import FeedItem from 'components/FeedItem/FeedItem'
-import Loader from 'shared/ui/Loader'
 import AmountChanger from 'shared/ui/AmountChanger'
-import useSmallScreen from 'hooks/useSmallScreen'
+import useSmallScreen from 'shared/hooks/useSmallScreen'
 
 export interface FeedListProps {
   className?: string
@@ -77,31 +76,29 @@ const FeedList: FC<FeedListProps> = memo(
     }, [isSmallScreen])
 
     return (
-      <Loader isLoading={feedList.length === 0}>
-        <div className={`grid grid-cols-${columns} ${className}`}>
-          {feedList.map((feed, index) => (
-            <FeedItem
-              ref={(el) => (videoRefs.current[index] = el as HTMLVideoElement)}
-              showDescription={showDescription || columns !== maxColumns}
-              key={feed.id}
-              feed={feed}
-              onVideoEnd={() => onVideoEnd(index)}
-            />
-          ))}
-          {!isSmallScreen && (
-            <AmountChanger
-              minAmount={minColumns}
-              maxAmount={maxColumns}
-              setAmount={setColumns}
-              amount={columns}
-              className={
-                'fixed top-1/3 right-2 p-1 flex flex-col text-xl bg-pink-200 border-2 border-pink-300 rounded-2xl text-gray-700 ' +
-                'dark:text-gray-100 dark:bg-gray-700 dark:border-gray-300'
-              }
-            />
-          )}
-        </div>
-      </Loader>
+      <div className={`grid grid-cols-${columns} ${className}`}>
+        {feedList.map((feed, index) => (
+          <FeedItem
+            ref={(el) => (videoRefs.current[index] = el as HTMLVideoElement)}
+            showDescription={showDescription || columns !== maxColumns}
+            key={feed.id}
+            feed={feed}
+            onVideoEnd={() => onVideoEnd(index)}
+          />
+        ))}
+        {!isSmallScreen && (
+          <AmountChanger
+            minAmount={minColumns}
+            maxAmount={maxColumns}
+            setAmount={setColumns}
+            amount={columns}
+            className={
+              'fixed top-1/3 right-2 p-1 flex flex-col text-xl bg-pink-200 border-2 border-pink-300 rounded-2xl text-gray-700 ' +
+              'dark:text-gray-100 dark:bg-gray-700 dark:border-gray-300'
+            }
+          />
+        )}
+      </div>
     )
   }
 )

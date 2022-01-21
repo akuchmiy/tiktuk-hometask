@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from 'enzyme'
-import UserTab from 'components/UserTab/UserTab'
+import UserTab from 'pages/UserTab'
 import { act } from 'react-dom/test-utils'
 import { getUserInfo } from 'shared/api'
 import router from 'react-router-dom'
-import React from 'react'
-import Loader from '../../../shared/ui/Loader'
+import React, { PropsWithChildren } from 'react'
+import Loader from 'shared/ui/Loader'
 
 jest.mock('components/FeedList/WithDataFeedList', () => {
   return function (props: any) {
@@ -19,10 +19,14 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn(),
 }))
 
+jest.mock('layouts', () => ({
+  Main: ({ children }: PropsWithChildren<any>) => <>{children}</>,
+}))
+
 const mockGetUserInfo = getUserInfo as jest.Mock
 const mockUseParams = (router as jest.Mocked<typeof router>).useParams
 
-describe('UserTab tests', function () {
+describe('UserInfo tests', function () {
   beforeEach(() => {
     mockLoader.mockImplementation(
       ({

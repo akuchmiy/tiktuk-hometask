@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
+import Layouts from 'layouts'
 import { useParams } from 'react-router-dom'
 import WithDataFeedList from 'components/FeedList/WithDataFeedList'
-import UserInfo from './UserInfo'
-import { UserData, getUserInfo } from 'shared/api'
+import UserInfo from 'components/UserInfo/UserInfo'
 import Loader from 'shared/ui/Loader'
+import { UserData, getUserInfo } from 'shared/api'
 
 const UserTab: FC = () => {
   const { username } = useParams<'username'>()
@@ -24,7 +25,7 @@ const UserTab: FC = () => {
   }, [username])
 
   return (
-    <>
+    <Layouts.Main>
       {isError ? (
         <h1 className={'text-center m-auto text-4xl'}>Something went wrong</h1>
       ) : (
@@ -34,7 +35,7 @@ const UserTab: FC = () => {
           </WithDataFeedList>
         </Loader>
       )}
-    </>
+    </Layouts.Main>
   )
 }
 

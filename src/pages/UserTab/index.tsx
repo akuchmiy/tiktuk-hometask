@@ -1,37 +1,29 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useCallback } from 'react'
 import Layouts from 'layouts'
 import { useParams } from 'react-router-dom'
 import WithDataFeedList from 'components/FeedList/WithDataFeedList'
 import UserInfo from 'components/UserInfo/UserInfo'
 import Loader from 'shared/ui/Loader'
 import { UserData, getUserInfo } from 'shared/api'
+import useAsync from 'shared/hooks/useAsync'
 
 const UserTab: FC = () => {
   const { username } = useParams<'username'>()
-  const [userData, setUserData] = useState<UserData | null>(null)
-  const [isError, setIsError] = useState(false)
 
-  useEffect(() => {
-    setUserData(null)
-    ;(async () => {
-      if (!username) {
-        return setIsError(true)
-      }
-
-      const data = await getUserInfo(username)
-      if (!data) setIsError(true)
-      setUserData(data)
-    })()
+  const fetchUserInfo = useCallback(() => {
+    return getUserInfo(username as string)
   }, [username])
+
+  const { data, error, isLoading } = useAsync<UserData>(fetchUserInfo)
 
   return (
     <Layouts.Main>
-      {isError ? (
+      {error ? (
         <h1 className={'text-center m-auto text-4xl'}>Something went wrong</h1>
       ) : (
-        <Loader isLoading={!userData}>
+        <Loader isLoading={isLoading || !data}>
           <WithDataFeedList currentColumns={3} username={username}>
-            <UserInfo userData={userData} />
+            <UserInfo userData={data} />
           </WithDataFeedList>
         </Loader>
       )}

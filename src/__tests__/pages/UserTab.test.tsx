@@ -67,7 +67,7 @@ describe('UserInfo tests', function () {
     expect(wrapper.find('.feed-list').text()).toBe('username')
   })
 
-  it('should render error when data is null', async function () {
+  it('should render Loader when data is null', async function () {
     mockGetUserInfo.mockResolvedValue(null)
     let wrapper: ReactWrapper
 
@@ -77,13 +77,11 @@ describe('UserInfo tests', function () {
 
     wrapper.setProps({})
 
-    expect(wrapper.find('h1').text()).toBe('Something went wrong')
+    expect(wrapper.find('Loader').prop('isLoading')).toBe(true)
   })
 
-  it('should render error when username is empty', async function () {
-    mockUseParams.mockReset()
-    mockUseParams.mockReturnValue({ username: '' })
-
+  it('should render error when fetch fails', async function () {
+    mockGetUserInfo.mockRejectedValue(new Error('error'))
     let wrapper: ReactWrapper
 
     await act(async () => {

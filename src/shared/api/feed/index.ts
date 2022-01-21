@@ -17,10 +17,15 @@ export async function getHashtagFeed(hashtag: string): Promise<Feed[]> {
 async function getFeed(url: string, config?: AxiosRequestConfig) {
   try {
     const { data } = await apiClient.get<Feed[]>(url, config)
+    checkFeed(data)
 
     return data
   } catch (e: any) {
     if (e instanceof Error) throw new Error(e.message)
     else throw new Error('Unexpected error')
   }
+}
+
+function checkFeed(feedList: Feed[]) {
+  if (!Array.isArray(feedList)) throw new Error('Not an array')
 }

@@ -6,28 +6,29 @@ jest.mock('shared/api/base')
 const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>
 
 describe('user service tests', () => {
+  beforeEach(() => {
+    mockedApiClient.get.mockResolvedValue({ data: { user: 'dima' } })
+  })
+
   it('should call the get method of the API client instance with the appropriate URL', async () => {
     const username = 'Dima'
 
-    const user = await getUserInfo(username)
+    await getUserInfo(username)
 
     expect(mockedApiClient.get.mock.calls[0][0]).toBe(`user/info/${username}`)
-    expect(user).toBeNull()
   })
 
-  it('should return data from the response object it data.user is present', async () => {
-    mockedApiClient.get.mockResolvedValueOnce({ data: { user: 'dima' } })
-
-    const user = await getUserInfo('doesnt matter')
+  it('should return data from the response object', async () => {
+    const user = await getUserInfo("doesn't matter")
 
     expect(user).toEqual({ user: 'dima' })
   })
 
-  it('should return null if user field is not present in the response data object', async () => {
-    mockedApiClient.get.mockResolvedValueOnce({ data: { notUser: 'dima' } })
+  it('should throw an error if promise rejected', async () => {
+    mockedApiClient.get.mockRejectedValue(new Error('lol'))
 
-    const user = await getUserInfo('doesnt matter')
+    const user = async () => await getUserInfo("doesn't matter")
 
-    expect(user).toBeNull()
+    await expect(user).rejects.toThrow('lol')
   })
 })

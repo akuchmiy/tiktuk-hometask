@@ -40,4 +40,16 @@ describe('feedService tests', () => {
       `/hashtag/feed/${hashtag}`
     )
   })
+
+  it('should throw an error when promise rejects with an Error type', async () => {
+    mockedApiClient.get.mockRejectedValue(new Error('an error'))
+
+    await expect(getTrendingFeed()).rejects.toThrowError('an error')
+  })
+
+  it('should throw an error when promise rejects with other type', async () => {
+    mockedApiClient.get.mockRejectedValue('string')
+
+    await expect(getTrendingFeed()).rejects.toThrowError('Unexpected error')
+  })
 })

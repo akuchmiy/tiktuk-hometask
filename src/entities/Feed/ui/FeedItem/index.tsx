@@ -1,8 +1,9 @@
 import React, { forwardRef, useCallback, useState } from 'react'
-import FeedDescription from './FeedDescription'
-import VideoStatistics from './VideoStatistics'
+import { FeedDescription } from '../FeedDescription'
+import { FeedStatistics } from '../FeedStatistics'
+import { toggleVideo } from '../../lib'
 import { Feed } from 'shared/api'
-import './feedItem.css'
+import './index.css'
 
 export interface FeedItemProps {
   feed: Feed
@@ -10,11 +11,11 @@ export interface FeedItemProps {
   onVideoEnd: () => void
 }
 
-const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
+export const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
   ({ feed, showDescription = false, onVideoEnd }, ref) => {
     const [isPlaying, setIsPlaying] = useState(false)
 
-    const playVideo = useCallback(
+    const togglePlay = useCallback(
       async (
         event:
           | React.MouseEvent<HTMLVideoElement>
@@ -27,15 +28,9 @@ const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
           return
 
         const video = event.target as HTMLVideoElement
-        if (video.paused) {
-          try {
-            await video.play()
-            setIsPlaying(true)
-          } catch (e) {}
-        } else {
-          video.pause()
-          setIsPlaying(false)
-        }
+        const playing = await toggleVideo(video)
+
+        setIsPlaying(playing)
       },
       [setIsPlaying]
     )
@@ -68,15 +63,15 @@ const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
             }
             aria-describedby={`${feed.createTime}`}
             autoPlay={false}
-            onClick={playVideo}
-            onKeyPress={playVideo}
+            onClick={togglePlay}
+            onKeyPress={togglePlay}
             className={`video object-cover cursor-pointer`}
             {...feed.videoMeta}
           >
             <source src={feed.videoUrl} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </video>
-          <VideoStatistics
+          <FeedStatistics
             className={
               'absolute bottom-5 right-2 transform translate-x-20 group-hover:translate-x-0 group-focus:translate-x-0 transition-transform'
             }
@@ -89,5 +84,3 @@ const FeedItem = forwardRef<HTMLVideoElement, FeedItemProps>(
 )
 
 FeedItem.displayName = 'FeedItem'
-
-export default FeedItem

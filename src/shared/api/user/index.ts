@@ -1,9 +1,16 @@
 import { apiClient } from 'shared/api/base'
 import { UserData } from './models'
+import { isDevEnv } from 'shared/config'
 
 export async function getUserInfo(username: string): Promise<UserData> {
+  let finalUrl: string
   try {
-    const { data } = await apiClient.get<UserData>(`user/info/${username}`)
+    if (isDevEnv) {
+      finalUrl = 'http://localhost:3000/userInfo.json'
+    } else {
+      finalUrl = `user/info/${username}`
+    }
+    const { data } = await apiClient.get<UserData>(finalUrl)
     checkUser(data)
 
     return data

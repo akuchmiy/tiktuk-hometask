@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthorMeta, Hashtag } from 'shared/api'
+import { trimHashtags } from '../lib'
 
 interface FeedDescriptionProps {
   authorMeta: AuthorMeta
@@ -8,18 +9,11 @@ interface FeedDescriptionProps {
   text: string
 }
 
-const FeedDescription: FC<FeedDescriptionProps> = ({
+export const FeedDescription: FC<FeedDescriptionProps> = ({
   authorMeta,
   hashtags,
   text,
 }) => {
-  const getTextWithoutHashtags = () => {
-    const firstHashIndex = text.indexOf('#')
-    if (firstHashIndex === -1) return text
-
-    return text.slice(0, firstHashIndex)
-  }
-
   return (
     <div className={'flex flex-grow mb-4 justify-start'}>
       <Link className={'mr-3'} to={`/user/${authorMeta.name}`}>
@@ -36,7 +30,7 @@ const FeedDescription: FC<FeedDescriptionProps> = ({
           </Link>
         </h3>
         <p className={'break-words max-w-xs'}>
-          {getTextWithoutHashtags()}
+          {trimHashtags(text)}
           {hashtags.map((hashtag, index) => (
             <Link key={index} to={`/?query=${hashtag.name}`}>
               <strong>#{hashtag.name} </strong>
@@ -47,5 +41,3 @@ const FeedDescription: FC<FeedDescriptionProps> = ({
     </div>
   )
 }
-
-export default FeedDescription

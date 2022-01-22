@@ -3,7 +3,7 @@ import { Feed, getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
 import Enzyme, { mount } from 'enzyme'
 import { FC } from 'react'
 import { act } from 'react-dom/test-utils'
-import useAsync from 'shared/hooks/useAsync'
+import { useAsync } from 'shared/hooks/useAsync'
 
 jest.mock('shared/api', () => ({
   getHashtagFeed: jest.fn(),

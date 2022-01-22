@@ -1,6 +1,7 @@
 import Enzyme, { shallow } from 'enzyme'
-import FeedItem from 'components/FeedItem/FeedItem'
+import { FeedItem } from 'entities/Feed/ui/FeedItem'
 import { Feed } from 'shared/api'
+import { act } from 'react-dom/test-utils'
 
 const feed: Feed = {} as Feed
 
@@ -34,12 +35,17 @@ describe('FeedItem tests', function () {
     const play = jest.fn(() => Promise.resolve())
     const pause = jest.fn()
 
-    await wrapper
-      .find('video')
-      .simulate('click', { target: { paused: true, play, pause } })
+    await act(async () => {
+      await wrapper
+        .find('video')
+        .simulate('click', { target: { paused: true, play, pause } })
+    })
 
     expect(play).toBeCalledTimes(1)
     expect(pause).toBeCalledTimes(0)
+
+    wrapper.setProps({})
+
     expect(wrapper.find('video').prop('aria-label')).toBe(
       'Press enter to stop the video'
     )
@@ -49,13 +55,18 @@ describe('FeedItem tests', function () {
     const play = jest.fn()
     const pause = jest.fn()
 
-    await wrapper.find('video').simulate('keypress', {
-      nativeEvent: new KeyboardEvent('keypress', { key: 'Enter' }),
-      target: { paused: true, play, pause },
+    await act(async () => {
+      await wrapper.find('video').simulate('keypress', {
+        nativeEvent: new KeyboardEvent('keypress', { key: 'Enter' }),
+        target: { paused: true, play, pause },
+      })
     })
 
     expect(play).toBeCalledTimes(1)
     expect(pause).toBeCalledTimes(0)
+
+    wrapper.setProps({})
+
     expect(wrapper.find('video').prop('aria-label')).toBe(
       'Press enter to stop the video'
     )

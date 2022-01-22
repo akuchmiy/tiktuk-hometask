@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme'
-import VideoStatistics from 'components/FeedItem/VideoStatistics'
+import { FeedStatistics } from 'entities/Feed/ui/FeedStatistics'
 import { Feed } from 'shared/api'
 
 jest.mock('shared/lib', () => ({
@@ -13,9 +13,9 @@ const feed: Feed = {
   commentCount: 100,
 } as Feed
 
-describe('VideoStatistics tests', function () {
+describe('FeedStatistics tests', function () {
   it('should match snapshot', function () {
-    const wrapper = shallow(<VideoStatistics feed={feed} />)
+    const wrapper = shallow(<FeedStatistics feed={feed} />)
 
     expect(wrapper.debug()).toMatchSnapshot()
   })

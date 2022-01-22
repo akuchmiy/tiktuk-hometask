@@ -8,7 +8,7 @@ interface VideoStatisticsProps {
   className?: string
 }
 
-const VideoStatistics: FC<VideoStatisticsProps> = ({
+export const FeedStatistics: FC<VideoStatisticsProps> = ({
   feed,
   className = '',
 }) => {
@@ -39,5 +39,3 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
     </div>
   )
 }
-
-export default VideoStatistics

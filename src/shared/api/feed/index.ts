@@ -1,6 +1,7 @@
 import { apiClient } from 'shared/api/base'
 import { AxiosRequestConfig } from 'axios'
 import { Feed } from './models'
+import { isDevEnv } from 'shared/config'
 
 export async function getTrendingFeed(): Promise<Feed[]> {
   return getFeed('/trending/feed')
@@ -15,8 +16,14 @@ export async function getHashtagFeed(hashtag: string): Promise<Feed[]> {
 }
 
 async function getFeed(url: string, config?: AxiosRequestConfig) {
+  let finalUrl: string
   try {
-    const { data } = await apiClient.get<Feed[]>(url, config)
+    if (isDevEnv) {
+      finalUrl = 'http://localhost:3000/feed.json'
+    } else {
+      finalUrl = url
+    }
+    const { data } = await apiClient.get<Feed[]>(finalUrl, config)
     checkFeed(data)
 
     return data

@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { Feed, getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
-import useAsync from 'shared/hooks/useAsync'
+import { useAsync } from 'shared/hooks/useAsync'
 
 function useFeed(username: string | undefined, queryParam: string | null) {
   const fetchFeed = useCallback(() => {

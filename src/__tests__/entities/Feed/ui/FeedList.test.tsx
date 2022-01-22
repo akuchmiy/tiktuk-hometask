@@ -1,25 +1,11 @@
 import { mount, shallow } from 'enzyme'
-import FeedList from 'components/FeedList/FeedList'
-import useSmallScreen from 'shared/hooks/useSmallScreen'
+import { FeedList } from 'entities/Feed/ui/FeedList'
 import React, { useEffect } from 'react'
-import FeedItem, { FeedItemProps } from 'components/FeedItem/FeedItem'
+import { FeedItem, FeedItemProps } from 'entities/Feed/ui/FeedItem'
 import { act } from 'react-dom/test-utils'
 import { Feed } from 'shared/api'
-import Loader from 'shared/ui/Loader'
 
-jest.mock('shared/ui/Loader')
-const mockLoader = Loader as jest.Mock
-
-jest.mock(
-  'shared/ui/AmountChanger',
-  () =>
-    function AmountChanger() {
-      return <span>AmountChanger</span>
-    }
-)
-jest.mock('components/FeedItem/FeedItem')
-
-jest.mock('shared/hooks/useSmallScreen')
+jest.mock('entities/Feed/ui/FeedItem')
 
 const feedList = [
   { id: '1' },
@@ -37,8 +23,6 @@ describe('FeedList tests', function () {
   let pauseSpy: jest.SpyInstance
   let scrollSpy: jest.SpyInstance
 
-  let mockUseSmallScreen: jest.Mock
-
   beforeAll(() => {
     Object.defineProperty(window, 'IntersectionObserver', {
       value: mockObserver,
@@ -46,13 +30,6 @@ describe('FeedList tests', function () {
   })
 
   beforeEach(() => {
-    mockLoader.mockImplementation(
-      ({
-        isLoading,
-        children,
-      }: React.PropsWithChildren<{ isLoading: boolean }>) => <>{children}</>
-    )
-
     mockObserver.mockImplementation(() => ({
       observe: mockObserve,
       disconnect: mockDisconnect,
@@ -77,51 +54,37 @@ describe('FeedList tests', function () {
       }
     )
 
-    mockUseSmallScreen = useSmallScreen as jest.Mock
-    mockUseSmallScreen.mockReturnValue(true)
-
     playSpy = jest.spyOn(HTMLMediaElement.prototype, 'play')
     pauseSpy = jest.spyOn(HTMLMediaElement.prototype, 'pause')
     scrollSpy = jest.spyOn(window, 'scrollTo')
   })
 
-  it('should render FeedItems without AmountChanger', function () {
-    const wrapper = shallow(<FeedList feedList={feedList} />)
-
-    expect(wrapper.find('FeedItem')).toHaveLength(feedList.length)
-    expect(wrapper.find('AmountChanger')).toHaveLength(0)
-  })
-
-  it('should render FeedItems with AmountChanger', function () {
-    mockUseSmallScreen.mockReturnValueOnce(false)
-    const wrapper = shallow(<FeedList feedList={feedList} />)
-
-    expect(wrapper.find('FeedItem')).toHaveLength(feedList.length)
-    expect(wrapper.find('AmountChanger')).toHaveLength(1)
-  })
-
   it('should not render FeedItems', function () {
-    const wrapper = shallow(<FeedList feedList={[]} />)
+    const wrapper = shallow(<FeedList feedList={[]} columns={1} />)
 
     expect(wrapper.find('FeedItem')).toHaveLength(0)
   })
 
   it('should create an IntersectionObserver instance', async function () {
-    await mount(<FeedList feedList={feedList} />)
+    await mount(<FeedList feedList={feedList} columns={1} />)
 
     expect(mockObserver).toBeCalledTimes(1)
     expect(mockObserve).toBeCalledTimes(feedList.length)
   })
 
   it('should play next video and scroll to it', async function () {
-    await mount(<FeedList feedList={feedList} />)
+    scrollSpy = jest.spyOn(window, 'scrollTo')
+
+    await act(async () => {
+      await mount(<FeedList feedList={feedList} columns={1} />)
+    })
 
     expect(scrollSpy).toBeCalledTimes(1)
     expect(playSpy).toBeCalledTimes(1)
   })
 
   it('intersectionObserver callback should pause all videos and play one which was intersected when columns === 1', async function () {
-    await mount(<FeedList currentColumns={1} feedList={feedList} />)
+    await mount(<FeedList columns={1} feedList={feedList} />)
 
     const intersectionCallback = mockObserver.mock.calls.pop()[0]
 
@@ -141,8 +104,7 @@ describe('FeedList tests', function () {
   })
 
   it('intersectionObserver callback should not pause all videos and not play one which was intersected when columns !== 1', async function () {
-    mockUseSmallScreen.mockReturnValueOnce(false)
-    await mount(<FeedList currentColumns={2} feedList={feedList} />)
+    await mount(<FeedList columns={2} feedList={feedList} />)
 
     const intersectionCallback = mockObserver.mock.calls.pop()[0]
 
@@ -162,7 +124,7 @@ describe('FeedList tests', function () {
   })
 
   it('should pause the video which was intersected with property isIntersecting === false', async function () {
-    await mount(<FeedList currentColumns={1} feedList={feedList} />)
+    await mount(<FeedList columns={1} feedList={feedList} />)
 
     const intersectionCallback = mockObserver.mock.calls.pop()[0]
 

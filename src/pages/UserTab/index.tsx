@@ -1,11 +1,14 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, useMemo } from 'react'
 import Layouts from 'layouts'
-import { useParams } from 'react-router-dom'
-import WithDataFeedList from 'components/FeedList/WithDataFeedList'
+import { ControllableFeedList } from 'features/ControllableFeedList'
+import { ErrorTitle } from 'shared/ui/ErrorTitle'
 import UserInfo from 'components/UserInfo/UserInfo'
 import Loader from 'shared/ui/Loader'
-import { UserData, getUserInfo } from 'shared/api'
-import useAsync from 'shared/hooks/useAsync'
+import { UserData, getUserInfo, Feed } from 'shared/api'
+import { useAsync } from 'shared/hooks/useAsync'
+import { useTitle } from 'shared/hooks/useTitle'
+import { useParams } from 'react-router-dom'
+import useFeed from 'hooks/useFeed'
 
 const UserTab: FC = () => {
   const { username } = useParams<'username'>()
@@ -14,17 +17,37 @@ const UserTab: FC = () => {
     return getUserInfo(username as string)
   }, [username])
 
-  const { data, error, isLoading } = useAsync<UserData>(fetchUserInfo)
+  const {
+    data,
+    error: userError,
+    isLoading: userIsLoading,
+  } = useAsync<UserData>(fetchUserInfo)
+  const {
+    feed,
+    error: feedError,
+    isLoading: feedIsLoading,
+  } = useFeed(username, null)
+  const isError = userError || feedError
+  const isLoading = userIsLoading || feedIsLoading
+
+  const newTitle = useMemo(() => `${username}'s profile`, [username])
+  useTitle(newTitle)
 
   return (
     <Layouts.Main>
-      {error ? (
-        <h1 className={'text-center m-auto text-4xl'}>Something went wrong</h1>
-      ) : (
-        <Loader isLoading={isLoading || !data}>
-          <WithDataFeedList currentColumns={3} username={username}>
-            <UserInfo userData={data} />
-          </WithDataFeedList>
+      <ErrorTitle className={'pl-7 mb-6 md:mb-16'} isError={!!isError}>
+        {newTitle}
+      </ErrorTitle>
+      {!isError && (
+        <Loader isLoading={isLoading}>
+          <UserInfo userData={data} />
+          <ControllableFeedList
+            showDescription={false}
+            currentColumns={3}
+            minColumns={1}
+            maxColumns={3}
+            feedList={feed as Feed[]}
+          />
         </Loader>
       )}
     </Layouts.Main>

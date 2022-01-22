@@ -11,6 +11,8 @@
 
 save.js
 trending.json
+public/feed.json
+public/userInfo.json
 
 # testing
 /coverage

@@ -5,13 +5,14 @@ import Loader from 'shared/ui/Loader'
 import { Feed } from 'shared/api'
 import { useTitle } from 'shared/hooks/useTitle'
 import useQuery from 'shared/hooks/useQuery'
-import useFeed from 'hooks/useFeed'
+import { feedModel } from 'entities/Feed'
+
 import { ErrorTitle } from 'shared/ui/ErrorTitle'
 
 const Home = () => {
   const query = useQuery()
   const queryParam = useMemo(() => query.get('query'), [query])
-  const { feed, error, isLoading } = useFeed(undefined, queryParam)
+  const { feed, error, isLoading } = feedModel.useFeed(undefined, queryParam)
 
   const newTitle = useMemo(() => {
     if (!queryParam) return 'Trending'

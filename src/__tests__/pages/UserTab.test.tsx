@@ -2,10 +2,9 @@ import { mount, ReactWrapper } from 'enzyme'
 import UserTab from 'pages/UserTab'
 import { act } from 'react-dom/test-utils'
 import { getUserInfo } from 'shared/api'
-import router from 'react-router-dom'
 import React, { PropsWithChildren } from 'react'
 import { useAsync } from 'shared/hooks/useAsync'
-import useFeed from 'hooks/useFeed'
+import { feedModel } from 'entities/Feed'
 import { useTitle } from 'shared/hooks/useTitle'
 
 jest.mock('features/ControllableFeedList', () => ({
@@ -35,7 +34,7 @@ jest.mock('react-router-dom', () => ({
 }))
 jest.mock('shared/hooks/useAsync')
 jest.mock('shared/hooks/useTitle')
-jest.mock('hooks/useFeed')
+jest.mock('entities/Feed')
 
 jest.mock('shared/api')
 
@@ -45,7 +44,7 @@ jest.mock('layouts', () => ({
 
 const mockUseTitle = useTitle as jest.Mock
 const mockUseAsync = useAsync as jest.Mock
-const mockUseFeed = useFeed as jest.Mock
+const mockUseFeed = feedModel.useFeed as jest.Mock
 const mockGetUserInfo = getUserInfo as jest.Mock
 
 describe('UserInfo tests', function () {

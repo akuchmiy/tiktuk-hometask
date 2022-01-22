@@ -1,4 +1,4 @@
-import useFeed from 'hooks/useFeed'
+import { feedModel } from 'entities/Feed'
 import { Feed, getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
 import Enzyme, { mount } from 'enzyme'
 import { FC } from 'react'
@@ -25,7 +25,7 @@ interface UseFeedProps {
 }
 
 const UseFeedWrapper: FC<UseFeedProps> = ({ username, query }) => {
-  useFeed(username, query)
+  feedModel.useFeed(username, query)
 
   return <span>useFeed</span>
 }

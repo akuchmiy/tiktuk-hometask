@@ -8,7 +8,7 @@ import { UserData, getUserInfo, Feed } from 'shared/api'
 import { useAsync } from 'shared/hooks/useAsync'
 import { useTitle } from 'shared/hooks/useTitle'
 import { useParams } from 'react-router-dom'
-import useFeed from 'hooks/useFeed'
+import { feedModel } from 'entities/Feed'
 
 const UserTab: FC = () => {
   const { username } = useParams<'username'>()
@@ -26,7 +26,7 @@ const UserTab: FC = () => {
     feed,
     error: feedError,
     isLoading: feedIsLoading,
-  } = useFeed(username, null)
+  } = feedModel.useFeed(username, null)
   const isError = userError || feedError
   const isLoading = userIsLoading || feedIsLoading
 

@@ -7,7 +7,7 @@ interface UserInfoProps {
   userData: UserData | null
 }
 
-const UserInfo: FC<UserInfoProps> = ({ userData }) => {
+export const UserInfo: FC<UserInfoProps> = ({ userData }) => {
   const { likes, followers, following } = useMemo(() => {
     const stats = userData?.stats
     if (stats) {
@@ -85,5 +85,3 @@ const UserInfo: FC<UserInfoProps> = ({ userData }) => {
     </div>
   )
 }
-
-export default UserInfo

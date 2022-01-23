@@ -1,5 +1,5 @@
 import Enzyme, { shallow } from 'enzyme'
-import UserInfo from 'components/UserInfo/UserInfo'
+import { UserInfo } from 'entities/User'
 import { User, UserData, UserStats } from 'shared/api'
 
 jest.mock('shared/lib', () => ({

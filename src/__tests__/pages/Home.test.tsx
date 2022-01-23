@@ -1,6 +1,5 @@
-import { ReactWrapper, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import Home from 'pages/Home'
-import { act } from 'react-dom/test-utils'
 import React, { PropsWithChildren } from 'react'
 import useQuery from 'shared/hooks/useQuery'
 import { feedModel } from 'entities/Feed'

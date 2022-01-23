@@ -16,6 +16,8 @@ export interface FeedListProps {
   columns: number
 }
 
+const OBSERVE_WHEN_COLUMNS = [1]
+
 export const FeedList: FC<FeedListProps> = memo(
   ({ feedList, className = '', showDescription = false, columns }) => {
     const videoRefs = useRef<HTMLVideoElement[]>([])
@@ -30,9 +32,9 @@ export const FeedList: FC<FeedListProps> = memo(
     }
 
     useEffect(() => {
-      const onVideoIntersect = async (entries: IntersectionObserverEntry[]) => {
-        if (columns !== 1) return
+      if (!OBSERVE_WHEN_COLUMNS.includes(columns)) return
 
+      const onVideoIntersect = async (entries: IntersectionObserverEntry[]) => {
         const entry = entries[0]
         const video = entry.target as HTMLVideoElement
 

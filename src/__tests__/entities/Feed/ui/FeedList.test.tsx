@@ -103,24 +103,10 @@ describe('FeedList tests', function () {
     expect(pauseSpy).toBeCalledTimes(4)
   })
 
-  it('intersectionObserver callback should not pause all videos and not play one which was intersected when columns !== 1', async function () {
+  it('intersectionObserver should not be created when columns !== 1', async function () {
     await mount(<FeedList columns={2} feedList={feedList} />)
 
-    const intersectionCallback = mockObserver.mock.calls.pop()[0]
-
-    const entries = [
-      {
-        target: { play: jest.fn(), pause: jest.fn() },
-        isIntersecting: true,
-      },
-    ]
-
-    await act(async () => {
-      await intersectionCallback(entries)
-    })
-
-    expect(entries[0].target.play).toBeCalledTimes(0)
-    expect(pauseSpy).toBeCalledTimes(0)
+    expect(mockObserver).not.toBeCalled()
   })
 
   it('should pause the video which was intersected with property isIntersecting === false', async function () {

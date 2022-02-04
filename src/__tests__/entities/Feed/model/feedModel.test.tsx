@@ -1,6 +1,6 @@
 import { feedModel } from 'entities/Feed'
 import { Feed, getHashtagFeed, getTrendingFeed, getUserFeed } from 'shared/api'
-import Enzyme, { mount } from 'enzyme'
+import { mount } from 'enzyme'
 import { FC } from 'react'
 import { act } from 'react-dom/test-utils'
 import { useAsync } from 'shared/hooks/useAsync'
@@ -12,6 +12,10 @@ jest.mock('shared/api', () => ({
 }))
 
 jest.mock('shared/hooks/useAsync')
+
+jest.mock('shared/config', () => ({
+  isProdEnv: true,
+}))
 
 const mockUseAsync = useAsync as jest.Mock
 
@@ -31,11 +35,6 @@ const UseFeedWrapper: FC<UseFeedProps> = ({ username, query }) => {
 }
 
 describe('useFeed tests', function () {
-  let wrapper: Enzyme.ReactWrapper
-  beforeAll(() => {
-    process.env.NODE_ENV = 'production'
-  })
-
   beforeEach(async () => {
     mockUseAsync.mockResolvedValue({
       data: null,
@@ -47,10 +46,6 @@ describe('useFeed tests', function () {
     mockGetUserFeed.mockResolvedValue(['user'] as unknown as Feed[])
     mockGetHashtagFeed.mockResolvedValue(['hashtag'] as unknown as Feed[])
     mockGetTrendingFeed.mockResolvedValue(['trending'] as unknown as Feed[])
-  })
-
-  afterAll(() => {
-    process.env.NODE_ENV = 'test'
   })
 
   it('should call getUserFeed when node env is production and username is not undefined', async function () {

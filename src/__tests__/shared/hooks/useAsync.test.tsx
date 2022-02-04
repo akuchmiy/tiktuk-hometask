@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { useAsync } from 'shared/hooks/useAsync'
 import Enzyme, { mount } from 'enzyme'
 import { act } from 'react-dom/test-utils'

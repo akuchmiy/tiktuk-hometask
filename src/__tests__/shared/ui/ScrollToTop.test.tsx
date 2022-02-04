@@ -1,6 +1,7 @@
 import Enzyme, { mount } from 'enzyme'
 import ScrollToTop from 'shared/ui/ScrollToTop'
 import { act } from 'react-dom/test-utils'
+import React from 'react'
 
 jest.mock('@fortawesome/react-fontawesome', () => ({
   FontAwesomeIcon: () => null,

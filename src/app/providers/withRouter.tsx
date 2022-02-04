@@ -1,6 +1,6 @@
-import { Suspense } from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import Loader from '../../shared/ui/Loader'
+import Loader from 'shared/ui/Loader'
 
 export const withRouter = (component: () => React.ReactNode) => () =>
   (

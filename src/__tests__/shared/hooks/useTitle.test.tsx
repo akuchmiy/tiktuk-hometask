@@ -1,5 +1,5 @@
 import { mount } from 'enzyme'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { useTitle } from 'shared/hooks/useTitle'
 
 interface Props {

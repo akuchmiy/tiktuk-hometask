@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import UserTab from 'pages/UserTab'
 import NotFound from 'pages/NotFound'

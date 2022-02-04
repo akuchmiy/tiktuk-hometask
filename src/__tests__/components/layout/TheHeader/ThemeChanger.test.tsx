@@ -1,6 +1,7 @@
 import { mount } from 'enzyme'
 import ThemeChanger from 'components/layout/TheHeader/ThemeChanger'
 import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
+import React from 'react'
 
 jest.mock('@fortawesome/react-fontawesome', () => ({
   FontAwesomeIcon: (props: FontAwesomeIconProps) => <span>{props.icon}</span>,

@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme'
 import AmountChanger from 'shared/ui/AmountChanger'
+import React from 'react'
 
 describe('AmountChanger tests', function () {
   const mockSetAmount = jest.fn()

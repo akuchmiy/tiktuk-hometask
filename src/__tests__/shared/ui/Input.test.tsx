@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme'
 import Input from 'shared/ui/Input'
+import React from 'react'
 
 describe('Input tests', () => {
   it('should render input with text type', function () {

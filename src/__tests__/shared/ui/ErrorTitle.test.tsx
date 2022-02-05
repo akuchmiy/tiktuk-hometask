@@ -1,5 +1,6 @@
 import { ErrorTitle } from 'shared/ui/ErrorTitle'
 import { shallow } from 'enzyme'
+import React from 'react'
 
 describe('ErrorTitle tests', function () {
   it('should show error message', function () {

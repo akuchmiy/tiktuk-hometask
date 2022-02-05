@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme'
 import Loader from 'shared/ui/Loader'
+import React from 'react'
 
 describe('Loader tests', function () {
   it('should not render text', function () {

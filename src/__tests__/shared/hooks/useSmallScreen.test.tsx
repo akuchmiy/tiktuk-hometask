@@ -1,5 +1,5 @@
 import { mount, ReactWrapper } from 'enzyme'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import useSmallScreen from 'shared/hooks/useSmallScreen'
 import { act } from 'react-dom/test-utils'
 

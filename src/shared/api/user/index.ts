@@ -11,8 +11,8 @@ export async function getUserInfo(username: string): Promise<UserData> {
     checkUser(data)
 
     return data
-  } catch (e) {
-    if (e instanceof Error) throw e
+  } catch (error: any) {
+    if (error instanceof Error) throw error
     else throw new Error('Unexpected error')
   }
 }

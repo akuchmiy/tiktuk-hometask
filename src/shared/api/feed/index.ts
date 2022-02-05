@@ -22,8 +22,8 @@ async function getFeed(url: string, config?: AxiosRequestConfig) {
     checkFeed(data)
 
     return data
-  } catch (e: any) {
-    if (e instanceof Error) throw new Error(e.message)
+  } catch (error: any) {
+    if (error instanceof Error) throw error
     else throw new Error('Unexpected error')
   }
 }

@@ -16,13 +16,8 @@ export async function getHashtagFeed(hashtag: string): Promise<Feed[]> {
 }
 
 async function getFeed(url: string, config?: AxiosRequestConfig) {
-  let finalUrl: string
+  const finalUrl = isDevEnv ? 'http://localhost:3000/feed.json' : url
   try {
-    if (isDevEnv) {
-      finalUrl = 'http://localhost:3000/feed.json'
-    } else {
-      finalUrl = url
-    }
     const { data } = await apiClient.get<Feed[]>(finalUrl, config)
     checkFeed(data)
 

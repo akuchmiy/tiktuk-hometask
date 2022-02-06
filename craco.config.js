@@ -1,4 +1,6 @@
 const { loaderByName, removeLoaders, addAfterLoader } = require('@craco/craco')
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 // const replaceMinimizer = (webpackConfig, name, minimizer) => {
 //   const idx = webpackConfig.optimization.minimizer.findIndex(
@@ -14,6 +16,9 @@ module.exports = {
     },
   },
   webpack: {
+    plugins: {
+      add: [new BundleAnalyzerPlugin()],
+    },
     configure: (webpackConfig, { paths }) => {
       addAfterLoader(webpackConfig, loaderByName('babel-loader'), {
         test: /\.(js|mjs|jsx|ts|tsx)$/,

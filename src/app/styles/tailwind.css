@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
     body {
         @apply bg-pink-50 min-h-screen dark:bg-gray-600 overflow-x-hidden transition-colors duration-100;

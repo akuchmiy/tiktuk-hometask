@@ -35,9 +35,9 @@ const ThemeChanger: FC = () => {
       tabIndex={-1}
       aria-hidden={true}
       className={`text-black dark:text-white border-black dark:border-white ${classNames}`}
-      onClick={isDark ? () => setIsDark(false) : () => setIsDark(true)}
+      onClick={() => setIsDark(!isDark)}
     >
-      <FontAwesomeIcon icon={isDark ? ['fas', 'sun'] : ['fas', 'moon']} />
+      <FontAwesomeIcon icon={['fas', isDark ? 'sun' : 'moon']} />
     </button>
   )
 }

@@ -12,7 +12,7 @@ const renderReactDom = () => {
   )
 }
 
-if (cordova) {
+if (window.cordova) {
   document.addEventListener('deviceready', () => {
     renderReactDom()
   })

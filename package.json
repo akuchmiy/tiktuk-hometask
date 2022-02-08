@@ -47,6 +47,7 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/compose-function": "^0.0.30",
+    "@types/cordova": "^0.0.34",
     "@types/enzyme": "^3.10.11",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.7",
@@ -57,6 +58,7 @@
     "autoprefixer": "^9.8.8",
     "cordova-android": "^10.1.1",
     "cordova-browser": "^6.0.0",
+    "cordova-plugin-file": "^6.0.2",
     "enzyme": "^3.11.0",
     "esbuild-loader": "^2.18.0",
     "eslint": "^7.32.0",
@@ -70,6 +72,9 @@
     "platforms": [
       "android",
       "browser"
-    ]
+    ],
+    "plugins": {
+      "cordova-plugin-file": {}
+    }
   }
 }

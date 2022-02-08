@@ -6,4 +6,11 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <access origin="*" />
+    <access origin="cdvfile://*"/>
+    <access origin="file:///*"/>
+    <platform name="android">
+        <preference name="AndroidPersistentFileLocation" value="Internal" />
+        <preference name="AndroidExtraFilesystems" value="files, assets" />
+    </platform>
 </widget>

@@ -15,7 +15,6 @@ const Home = () => {
   const { feed, error, isLoading } = feedModel.useFeed(undefined, queryParam)
 
   const newTitle = useMemo(() => {
-    console.log(queryParam)
     if (!queryParam) return 'Trending'
 
     return `Trending for "${queryParam}"`

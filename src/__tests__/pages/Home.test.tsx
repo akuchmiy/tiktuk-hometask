@@ -11,6 +11,13 @@ jest.mock('entities/Feed')
 
 jest.mock('shared/api')
 
+jest.mock(
+  'shared/ui/Loader',
+  () =>
+    function Loader() {
+      return <span>Loader</span>
+    }
+)
 jest.mock('layouts', () => ({
   Main: ({ children }: PropsWithChildren<any>) => <>{children}</>,
 }))

@@ -1,16 +1,23 @@
 import { shallow, ShallowWrapper } from 'enzyme'
-import HeaderSearch from 'components/layout/TheHeader/HeaderSearch'
+import { MainSearch } from 'features/MainSearch'
 import React from 'react'
 
 let mockNavigate = jest.fn()
 jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }))
+jest.mock(
+  'shared/ui/Input',
+  () =>
+    function Input() {
+      return <span>Input</span>
+    }
+)
 
 describe('HeaderSearch tests', function () {
   let wrapper: ShallowWrapper
   beforeEach(() => {
-    wrapper = shallow(<HeaderSearch />)
+    wrapper = shallow(<MainSearch />)
   })
 
   it('should render input with empty value', function () {

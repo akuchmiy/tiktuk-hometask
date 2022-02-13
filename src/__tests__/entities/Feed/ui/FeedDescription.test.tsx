@@ -28,7 +28,10 @@ describe('FeedDescription tests', function () {
       />
     )
 
-    wrapper.find('strong').forEach((strongTag, index) => {
+    const strongTags = wrapper.find('strong')
+    expect(strongTags.length).not.toBe(0)
+
+    strongTags.forEach((strongTag, index) => {
       const hashtagByIndex = hashTags[index]
       expect(strongTag.text()).toContain(hashtagByIndex.name)
     })

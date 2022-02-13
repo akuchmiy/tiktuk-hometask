@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDarkMode } from './model'
+import { changeTheme } from './lib'
 
 interface ThemeChangerProps {
   className?: string
@@ -11,9 +12,7 @@ export const ThemeChanger: FC<ThemeChangerProps> = ({ className = '' }) => {
   const { isDark, setIsDark } = useDarkMode(isInitialDark)
 
   useEffect(() => {
-    if (isDark) return document.documentElement.classList.add('dark')
-
-    document.documentElement.classList.remove('dark')
+    changeTheme(isDark)
   }, [isDark])
 
   return (

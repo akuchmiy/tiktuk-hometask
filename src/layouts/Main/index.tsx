@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import Header from 'layouts/partials/Header'
 import Footer from 'layouts/partials/Footer'
-import ScrollToTop from 'shared/ui/ScrollToTop'
+import { ScrollToTop } from 'features/ScrollToTop'
 
 export const Main: FC = ({ children }) => {
   return (

@@ -1,5 +1,5 @@
 import Enzyme, { mount } from 'enzyme'
-import ScrollToTop from 'shared/ui/ScrollToTop'
+import { ScrollToTop } from 'features/ScrollToTop'
 import { act } from 'react-dom/test-utils'
 import React from 'react'
 

@@ -1,8 +1,9 @@
-import React, { FC, FormEvent, useMemo } from 'react'
+import React, { FC, FormEvent } from 'react'
 import Input from 'shared/ui/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useInput from 'shared/hooks/useInput'
 import { useNavigate } from 'react-router-dom'
+import { getNewLocation, getInputAria } from './lib'
 
 interface MainSearchProps {
   className?: string
@@ -10,17 +11,10 @@ interface MainSearchProps {
 
 export const MainSearch: FC<MainSearchProps> = ({ className }) => {
   const query = useInput('')
+  const newLocation = getNewLocation(query.value)
+  const ariaNavigateTo = getInputAria(query.value)
+
   const navigate = useNavigate()
-  const [newLocation, ariaNavigateTo] = useMemo(() => {
-    if (!query.value) return ['', 'Enter hashtag or username']
-
-    if (!query.value.startsWith('#'))
-      return [`/user/${query.value}`, 'Find user by username']
-
-    const encodedWithoutHash = encodeURIComponent(query.value.substring(1))
-    return [`/?query=${encodedWithoutHash}`, `Get trending news by hashtag`]
-  }, [query])
-
   function findByQuery(e: FormEvent) {
     e.preventDefault()
 

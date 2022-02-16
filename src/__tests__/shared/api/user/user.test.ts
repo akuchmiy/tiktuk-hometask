@@ -1,9 +1,12 @@
 import { apiClient } from 'shared/api/base'
 import { getUserInfo } from 'shared/api/user'
+import { readFileFromWWW } from 'shared/lib'
 
 jest.mock('shared/api/base')
+jest.mock('shared/lib')
 
 const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>
+const mockedReadFileFromWWW = readFileFromWWW as jest.Mock
 
 describe('user service tests', () => {
   beforeEach(() => {
@@ -30,5 +33,22 @@ describe('user service tests', () => {
     const user = async () => await getUserInfo("doesn't matter")
 
     await expect(user).rejects.toThrow('lol')
+  })
+
+  it('should call readFileFromWWW when window.cordova is defined', async () => {
+    Object.defineProperty(window, 'cordova', {
+      writable: true,
+      value: 'someValue',
+    })
+    mockedReadFileFromWWW.mockResolvedValue('{"user": {}}')
+
+    await getUserInfo("doesn't matter")
+
+    expect(mockedReadFileFromWWW).toBeCalledWith('userInfo.json')
+
+    Object.defineProperty(window, 'cordova', {
+      writable: true,
+      value: undefined,
+    })
   })
 })

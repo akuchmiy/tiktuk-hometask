@@ -6,6 +6,7 @@ export const getEnvVar = (key: string) => {
 }
 
 export const API_KEY = getEnvVar('REACT_APP_RAPIDAPI_KEY')
+export const HOST_URL = getEnvVar('REACT_APP_HOST_URL')
 
 export const NODE_ENV = getEnvVar('NODE_ENV')
 export const isDevEnv = NODE_ENV === 'development'

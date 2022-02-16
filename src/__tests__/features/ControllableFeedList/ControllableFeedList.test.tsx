@@ -72,8 +72,6 @@ describe('ControllableFeedList tests', function () {
       />
     )
 
-    wrapper.setProps({})
-
     expect(wrapper.find('FeedList').prop('columns')).toBe(1)
   })
 

@@ -1,16 +1,23 @@
 import { shallow, ShallowWrapper } from 'enzyme'
-import HeaderSearch from 'components/layout/TheHeader/HeaderSearch'
+import { MainSearch } from 'features/MainSearch'
 import React from 'react'
 
 let mockNavigate = jest.fn()
 jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }))
+jest.mock(
+  'shared/ui/Input',
+  () =>
+    function Input() {
+      return <span>Input</span>
+    }
+)
 
 describe('HeaderSearch tests', function () {
   let wrapper: ShallowWrapper
   beforeEach(() => {
-    wrapper = shallow(<HeaderSearch />)
+    wrapper = shallow(<MainSearch />)
   })
 
   it('should render input with empty value', function () {
@@ -22,10 +29,14 @@ describe('HeaderSearch tests', function () {
   })
 
   it('should render button when query is not empty', function () {
-    wrapper.find('Input').simulate('change', { target: { value: 'text' } })
+    const expectedValue = 'text'
+
+    wrapper
+      .find('Input')
+      .simulate('change', { target: { value: expectedValue } })
 
     expect(wrapper.find('button').length).toBe(1)
-    expect(wrapper.find('Input').prop('value')).toBe('text')
+    expect(wrapper.find('Input').prop('value')).toBe(expectedValue)
   })
 
   it('should not call navigate if query is empty', function () {
@@ -40,19 +51,21 @@ describe('HeaderSearch tests', function () {
 
   it('should call navigate to hashtag when query starts with #', function () {
     const preventDefault = jest.fn()
+    const value = 'wasd'
 
-    wrapper.find('Input').simulate('change', { target: { value: '#wasd' } })
+    wrapper.find('Input').simulate('change', { target: { value: `#${value}` } })
     wrapper.find('form').simulate('submit', { preventDefault })
 
-    expect(mockNavigate.mock.calls[0][0]).toBe('/?query=wasd')
+    expect(mockNavigate.mock.calls[0][0]).toBe(`/?query=${value}`)
   })
 
   it('should call navigate to user page when query does not start with #', function () {
     const preventDefault = jest.fn()
+    const username = 'wasd'
 
-    wrapper.find('Input').simulate('change', { target: { value: 'wasd' } })
+    wrapper.find('Input').simulate('change', { target: { value: username } })
     wrapper.find('form').simulate('submit', { preventDefault })
 
-    expect(mockNavigate.mock.calls[0][0]).toBe('/user/wasd')
+    expect(mockNavigate.mock.calls[0][0]).toBe(`/user/${username}`)
   })
 })

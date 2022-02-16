@@ -1,7 +1,8 @@
 import { apiClient } from 'shared/api/base'
 import { AxiosRequestConfig } from 'axios'
 import { Feed } from './models'
-import { isDevEnv } from 'shared/config'
+import { isDevEnv, HOST_URL } from 'shared/config'
+import { readFileFromWWW } from 'shared/lib'
 
 export async function getTrendingFeed(): Promise<Feed[]> {
   return getFeed('/trending/feed')
@@ -16,15 +17,33 @@ export async function getHashtagFeed(hashtag: string): Promise<Feed[]> {
 }
 
 async function getFeed(url: string, config?: AxiosRequestConfig) {
-  const finalUrl = isDevEnv ? 'http://localhost:3000/feed.json' : url
+  const finalUrl = isDevEnv ? `${HOST_URL}/feed.json` : url
   try {
-    const { data } = await apiClient.get<Feed[]>(finalUrl, config)
+    const { data } = await getPlatformIndependentFeed(
+      'feed.json',
+      finalUrl,
+      config
+    )
     checkFeed(data)
 
     return data
   } catch (error: any) {
     if (error instanceof Error) throw error
     else throw new Error('Unexpected error')
+  }
+}
+
+async function getPlatformIndependentFeed(
+  filename: string,
+  url: string,
+  config?: AxiosRequestConfig
+): Promise<{ data: Feed[] }> {
+  if (!window.cordova) return apiClient.get<Feed[]>(url, config)
+
+  const result = await readFileFromWWW(filename)
+
+  return {
+    data: JSON.parse(result),
   }
 }
 

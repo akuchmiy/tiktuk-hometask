@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import HeaderSearch from './HeaderSearch'
+import { MainSearch } from 'features/MainSearch'
+import { ThemeChanger } from 'features/ThemeChanger'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ThemeChanger from './ThemeChanger'
-import './TheHeader.css'
+import './Header.css'
 
-function TheHeader() {
+function Header() {
   return (
     <header
       className={
@@ -32,11 +32,11 @@ function TheHeader() {
             </span>
           </Link>
         </div>
-        <HeaderSearch />
-        <ThemeChanger />
+        <MainSearch className={'on-small-search mr-6 md:w-1/3 md:mr-0'} />
+        <ThemeChanger className={'absolute right-3 top-3'} />
       </div>
     </header>
   )
 }
 
-export default TheHeader
+export default Header

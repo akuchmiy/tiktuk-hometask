@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme'
 import UserTab from 'pages/UserTab'
 import { getUserInfo } from 'shared/api'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { useAsync } from 'shared/hooks/useAsync'
 import { feedModel } from 'entities/Feed'
 import { useTitle } from 'shared/hooks/useTitle'
@@ -14,6 +14,17 @@ jest.mock('shared/hooks/useTitle')
 jest.mock('entities/Feed')
 
 jest.mock('shared/api')
+
+jest.mock(
+  'shared/ui/Loader',
+  () =>
+    function Loader() {
+      return <span>Loader</span>
+    }
+)
+jest.mock('layouts', () => ({
+  Main: ({ children }: PropsWithChildren<any>) => <>{children}</>,
+}))
 
 const mockUseTitle = useTitle as jest.Mock
 const mockUseAsync = useAsync as jest.Mock

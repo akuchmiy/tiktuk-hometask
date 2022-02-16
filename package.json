@@ -2,8 +2,10 @@
   "name": "tik-tuk",
   "version": "0.1.0",
   "private": true,
+  "author": "Anton Kuchmii",
+  "homepage": "./",
   "dependencies": {
-    "@akuchmiy/esbuild-ui-lib": "^1.0.0",
+    "@akuchmiy/esbuild-ui-lib": "^1.0.1",
     "@craco/craco": "^6.4.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -22,6 +24,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "lint": "eslint src/",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,6 +48,7 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/compose-function": "^0.0.30",
+    "@types/cordova": "^0.0.34",
     "@types/enzyme": "^3.10.11",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.7",
@@ -53,6 +57,9 @@
     "@types/react-router-dom": "^5.3.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "autoprefixer": "^9.8.8",
+    "cordova-android": "^10.1.1",
+    "cordova-browser": "^6.0.0",
+    "cordova-plugin-file": "^6.0.2",
     "enzyme": "^3.11.0",
     "esbuild-loader": "^2.18.0",
     "eslint": "^7.32.0",
@@ -61,5 +68,14 @@
     "prettier": "^2.4.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "webpack-bundle-analyzer": "^4.5.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android",
+      "browser"
+    ],
+    "plugins": {
+      "cordova-plugin-file": {}
+    }
   }
 }

@@ -20,7 +20,7 @@ describe('FeedVideo tests', function () {
   })
 
   it('video can be paused and played with a click', async function () {
-    const play = jest.fn(() => Promise.resolve())
+    const play = jest.fn().mockResolvedValue('')
     const pause = jest.fn()
 
     await act(async () => {

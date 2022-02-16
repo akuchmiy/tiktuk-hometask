@@ -1,25 +1,23 @@
-import React, { FC, FormEvent, useMemo } from 'react'
+import React, { FC, FormEvent } from 'react'
 import Input from 'shared/ui/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useInput from 'shared/hooks/useInput'
 import { useNavigate } from 'react-router-dom'
+import { getNewLocation, getInputAria } from './lib'
 
-const HeaderSearch: FC = () => {
+interface MainSearchProps {
+  className?: string
+}
+
+export const MainSearch: FC<MainSearchProps> = ({ className }) => {
   const query = useInput('')
+  const newLocation = getNewLocation(query.value)
+  const ariaNavigateTo = getInputAria(query.value)
+
   const navigate = useNavigate()
-  const [newLocation, ariaNavigateTo] = useMemo(() => {
-    if (!query.value) return ['', 'Enter hashtag or username']
-
-    if (query.value.startsWith('#')) {
-      const withoutHash = query.value.replace(/#+/, '')
-      return [`/?query=${withoutHash}`, `Get trending news by hashtag`]
-    } else {
-      return [`/user/${query.value}`, 'Find user by username']
-    }
-  }, [query])
-
   function findByQuery(e: FormEvent) {
     e.preventDefault()
+
     if (newLocation) navigate(newLocation)
     query.setValue('')
   }
@@ -27,9 +25,7 @@ const HeaderSearch: FC = () => {
   return (
     <form
       onSubmit={findByQuery}
-      className={
-        'on-small-search center relative overflow-hidden  w-1/2 mr-6 md:w-1/3 md:mr-0'
-      }
+      className={`center relative overflow-hidden w-1/2 ${className}`}
     >
       <Input
         aria-label={ariaNavigateTo}
@@ -53,5 +49,3 @@ const HeaderSearch: FC = () => {
     </form>
   )
 }
-
-export default HeaderSearch

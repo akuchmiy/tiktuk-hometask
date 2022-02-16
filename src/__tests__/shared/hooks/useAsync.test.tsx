@@ -41,8 +41,6 @@ describe('useAsync tests', function () {
       wrapper = await mount(<UseAsyncWrapper immediate={true} />)
     })
 
-    wrapper.setProps({})
-
     expect(wrapper.find('.data').text()).toBe('string')
     expect(mockFetch).toBeCalledTimes(1)
   })
@@ -54,8 +52,6 @@ describe('useAsync tests', function () {
       wrapper = await mount(<UseAsyncWrapper immediate={true} />)
     })
 
-    wrapper.setProps({})
-
     expect(wrapper.find('.data').text()).toBe('')
     expect(wrapper.find('.error').text()).toBe('some error')
   })
@@ -65,8 +61,6 @@ describe('useAsync tests', function () {
     await act(async () => {
       wrapper = await mount(<UseAsyncWrapper immediate={false} />)
     })
-
-    wrapper.setProps({})
 
     expect(wrapper.find('.loading').text()).toBe('true')
     expect(wrapper.find('.data').text()).toBe('')

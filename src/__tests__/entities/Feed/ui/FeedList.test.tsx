@@ -49,7 +49,7 @@ describe('FeedList tests', function () {
           if (feed.id === '1') {
             onVideoEnd()
           }
-        }, [])
+        }, [feed.id, onVideoEnd])
         return <video ref={ref} />
       }
     )

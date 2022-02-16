@@ -1,4 +1,4 @@
-import React from 'react'
+import { OBSERVER_OPTIONS } from '../constants'
 
 export const playVideo = async (video: HTMLVideoElement) => {
   try {
@@ -23,30 +23,26 @@ export const toggleVideo = async (
   return playVideo(video)
 }
 
-export const pauseVideos = (
-  videos: React.MutableRefObject<HTMLVideoElement[]>
-) => {
-  videos.current.forEach((video) => pauseVideo(video))
+export const pauseVideos = (videos: HTMLVideoElement[]) => {
+  videos.forEach((video) => pauseVideo(video))
 }
 
 export const scrollToVideo = (video: HTMLVideoElement) => {
-  const rect = video.getBoundingClientRect()
+  const { top, height } = video.getBoundingClientRect()
   window.scrollTo({
-    top: rect.top + window.scrollY - rect.height / 5,
+    top: top + window.scrollY - height / 5,
     left: 0,
     behavior: 'smooth',
   })
 }
 
 export const observeVideos = (
-  videos: React.MutableRefObject<HTMLVideoElement[]>,
+  videos: HTMLVideoElement[],
   onVideoIntersect: IntersectionObserverCallback
 ) => {
-  const observer = new IntersectionObserver(onVideoIntersect, {
-    threshold: 0.5,
-  })
+  const observer = new IntersectionObserver(onVideoIntersect, OBSERVER_OPTIONS)
 
-  videos.current.forEach((video) => {
+  videos.forEach((video) => {
     if (video instanceof HTMLVideoElement) {
       observer.observe(video)
     }

@@ -1,6 +1,7 @@
-import React, { forwardRef, useCallback, useState } from 'react'
+import React, { forwardRef } from 'react'
 import { Feed } from 'shared/api'
-import { toggleVideo } from '../lib'
+import { useVideoControls } from '../model'
+import { IS_INITIAL_PLAYING } from '../constants'
 
 interface FeedVideoProps {
   feed: Feed
@@ -10,27 +11,12 @@ interface FeedVideoProps {
 
 export const FeedVideo = forwardRef<HTMLVideoElement, FeedVideoProps>(
   ({ feed, className = '', onVideoEnd }, ref) => {
-    const [isPlaying, setIsPlaying] = useState(false)
+    const { isPlaying, togglePlay } = useVideoControls(IS_INITIAL_PLAYING)
 
-    const togglePlay = useCallback(
-      async (
-        event:
-          | React.MouseEvent<HTMLVideoElement>
-          | React.KeyboardEvent<HTMLVideoElement>
-      ) => {
-        if (
-          event.nativeEvent instanceof KeyboardEvent &&
-          event.nativeEvent?.key !== 'Enter'
-        )
-          return
+    const ariaLabel = isPlaying
+      ? 'Press enter to stop the video'
+      : 'Press enter to resume the video'
 
-        const video = event.target as HTMLVideoElement
-        const playing = await toggleVideo(video)
-
-        setIsPlaying(playing)
-      },
-      [setIsPlaying]
-    )
     return (
       <>
         <span id={`${feed.createTime}`} className={'visually-hidden'}>
@@ -40,17 +26,14 @@ export const FeedVideo = forwardRef<HTMLVideoElement, FeedVideoProps>(
           onEnded={onVideoEnd}
           ref={ref}
           tabIndex={0}
-          aria-label={
-            isPlaying
-              ? 'Press enter to stop the video'
-              : 'Press enter to resume the video'
-          }
+          aria-label={ariaLabel}
           aria-describedby={`${feed.createTime}`}
-          autoPlay={false}
+          autoPlay={IS_INITIAL_PLAYING}
           onClick={togglePlay}
           onKeyPress={togglePlay}
           className={className}
-          {...feed.videoMeta}
+          width={feed.videoMeta?.width}
+          height={feed.videoMeta?.height}
         >
           <source src={feed.videoUrl} type="video/mp4" />
           Sorry, your browser doesn't support embedded videos.

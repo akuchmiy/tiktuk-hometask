@@ -1,0 +1,41 @@
+import React, { FC } from 'react'
+import { Feed } from 'shared/api'
+import { formatNumber } from 'shared/lib'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+interface VideoStatisticsProps {
+  feed: Feed
+  className?: string
+}
+
+export const FeedStatistics: FC<VideoStatisticsProps> = ({
+  feed,
+  className = '',
+}) => {
+  return (
+    <div
+      className={`flex flex-col gap-y-3.5 text-black dark:text-gray-100 leading-5 ${className}`}
+    >
+      <button
+        aria-label={'Likes'}
+        className={
+          'relative w-16 h-16 bg-gray-100 dark:bg-gray-600 rounded-full border-l-2 border-t-2 border-black dark:border-gray-100 transition-colors duration-100 hover:opacity-80'
+        }
+      >
+        <FontAwesomeIcon className={'text-md'} icon={['fas', 'heart']} />
+        <br />
+        <span>{formatNumber(feed.diggCount, 1)}</span>
+      </button>
+      <button
+        aria-label={'Comments'}
+        className={
+          'relative w-16 h-16 bg-gray-100 dark:bg-gray-600 rounded-full border-l-2 border-t-2 border-black dark:border-gray-100 transition-colors duration-100 hover:opacity-80'
+        }
+      >
+        <FontAwesomeIcon className={'text-md'} icon={['fas', 'comment']} />
+        <br />
+        <span>{formatNumber(feed.commentCount, 1)}</span>
+      </button>
+    </div>
+  )
+}

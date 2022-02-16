@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useMemo } from 'react'
-import BasicInput from '../../BasicInput/BasicInput'
+import Input from 'shared/ui/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import useInput from '../../../hooks/useInput'
+import useInput from 'shared/hooks/useInput'
 import { useNavigate } from 'react-router-dom'
 
 const HeaderSearch: FC = () => {
@@ -31,7 +31,7 @@ const HeaderSearch: FC = () => {
         'on-small-search center relative overflow-hidden  w-1/2 mr-6 md:w-1/3 md:mr-0'
       }
     >
-      <BasicInput
+      <Input
         aria-label={ariaNavigateTo}
         {...query.use()}
         placeholder={'Hashtag or nickname'}

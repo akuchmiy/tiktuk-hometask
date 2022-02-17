@@ -1,12 +1,10 @@
 import { apiClient } from 'shared/api/base'
 import { UserData } from './models'
-import { isDevEnv, HOST_URL } from 'shared/config'
+import { HOST_URL } from 'shared/config'
 import { readFileFromWWW } from 'shared/lib'
 
 export async function getUserInfo(username: string): Promise<UserData> {
-  const finalUrl = isDevEnv
-    ? `${HOST_URL}/userInfo.json`
-    : `user/info/${username}`
+  const finalUrl = `${HOST_URL}/userInfo.json`
   try {
     const { data } = await getPlatformIndependentUserInfo(
       'userInfo.json',

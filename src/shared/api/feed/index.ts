@@ -1,7 +1,7 @@
 import { apiClient } from 'shared/api/base'
 import { AxiosRequestConfig } from 'axios'
 import { Feed } from './models'
-import { isDevEnv, HOST_URL } from 'shared/config'
+import { HOST_URL } from 'shared/config'
 import { readFileFromWWW } from 'shared/lib'
 
 export async function getTrendingFeed(): Promise<Feed[]> {
@@ -17,7 +17,7 @@ export async function getHashtagFeed(hashtag: string): Promise<Feed[]> {
 }
 
 async function getFeed(url: string, config?: AxiosRequestConfig) {
-  const finalUrl = isDevEnv ? `${HOST_URL}/feed.json` : url
+  const finalUrl = `${HOST_URL}/feed.json`
   try {
     const { data } = await getPlatformIndependentFeed(
       'feed.json',

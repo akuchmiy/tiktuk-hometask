@@ -17,7 +17,11 @@ module.exports = {
   },
   webpack: {
     plugins: {
-      add: [new BundleAnalyzerPlugin()],
+      add: [
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'disabled',
+        }),
+      ],
     },
     configure: (webpackConfig, { paths }) => {
       addAfterLoader(webpackConfig, loaderByName('babel-loader'), {

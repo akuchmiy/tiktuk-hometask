@@ -1,13 +1,8 @@
 import React, { FC, memo, useEffect, useRef } from 'react'
 import { Feed } from 'shared/api'
 import { FeedItem } from 'entities/Feed/ui/FeedItem'
-import {
-  observeVideos,
-  pauseVideo,
-  pauseVideos,
-  playVideo,
-  scrollToVideo,
-} from '../lib'
+import { playVideo, scrollToVideo } from '../lib'
+import { useVideoScroll } from '../model/useVideoScroll'
 
 export interface FeedListProps {
   className?: string
@@ -16,38 +11,21 @@ export interface FeedListProps {
   columns: number
 }
 
-const OBSERVE_WHEN_COLUMNS = [1]
-
 export const FeedList: FC<FeedListProps> = memo(
   ({ feedList, className = '', showDescription = false, columns }) => {
     const videoRefs = useRef<HTMLVideoElement[]>([])
 
-    const onVideoEnd = async (index: number) => {
-      if (index + 1 >= videoRefs.current.length) return
+    const onVideoEnd = async (endedVideoIndex: number) => {
+      const nextVideoIndex = endedVideoIndex + 1
+      if (nextVideoIndex >= videoRefs.current.length) return
 
-      const nextVideo = videoRefs.current[index + 1]
+      const nextVideo = videoRefs.current[nextVideoIndex]
 
       await playVideo(nextVideo)
       scrollToVideo(nextVideo)
     }
 
-    useEffect(() => {
-      if (!OBSERVE_WHEN_COLUMNS.includes(columns)) return
-
-      const onVideoIntersect = async (entries: IntersectionObserverEntry[]) => {
-        const entry = entries[0]
-        const video = entry.target as HTMLVideoElement
-
-        if (!entry.isIntersecting) return pauseVideo(video)
-
-        pauseVideos(videoRefs)
-        return playVideo(video)
-      }
-
-      const observer = observeVideos(videoRefs, onVideoIntersect)
-
-      return () => observer.disconnect()
-    }, [feedList, columns])
+    useVideoScroll(videoRefs.current, columns)
 
     useEffect(() => {
       videoRefs.current = videoRefs.current.slice(0, feedList.length)
